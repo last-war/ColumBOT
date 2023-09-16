@@ -7,8 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = "^0.103.1"
 uvicorn = {extras = ["standard"], version = "^0.23.2"}
+fastapi = "^0.103.1"
+pydantic = "1.10.12"
+pytelegrambotapi = "^4.13.0"
 
 
 [build-system]

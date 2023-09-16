@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
+from src.conf.config import settings
+from src.routes import telegrambot
+
+telegram_token = settings.telegram_token
+
 app = FastAPI()
 
 origins = ["*"]
@@ -14,6 +19,9 @@ app.add_middleware(
 )
 
 
-@app.get("/api/healthchecker")
+@app.get("/")
 def root():
     return {"message": "Welcome to FastAPI!"}
+
+
+app.include_router(telegrambot.router, prefix='/api')
