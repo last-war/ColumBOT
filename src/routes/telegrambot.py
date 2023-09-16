@@ -17,7 +17,7 @@ async def telegram(request: Request):
     except Exception as e:
         print('Error at telegram...')
         print(e)
-        return 'OK', 200
+        return 'BAD REQUEST', 400
 
 
 @router.post('/set-telegram-webhook')
