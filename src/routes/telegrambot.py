@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 
-from src.services.telegrambot import set_webhook, send_message
+from src.services.telegrambot import set_webhook, send_message, bot_logic
 
 router = APIRouter(prefix="/telegram", tags=["telegram"])
 
@@ -12,7 +12,7 @@ async def telegram(request: Request):
         print(body)
         sender_id = body['message']['from']['id']
         query = body['message']['text']
-        send_message(sender_id, query)
+        bot_logic(sender_id, query)
         return 'OK', 200
     except Exception as e:
         print('Error at telegram...')

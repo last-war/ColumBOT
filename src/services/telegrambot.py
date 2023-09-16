@@ -63,3 +63,33 @@ def send_message(chat_id: int, message: str) -> bool:
         return True
     else:
         return False
+
+
+MESSAGE_COMMAND = {
+    'send_message': send_message,
+}
+
+
+
+def bot_logic(chat_id: int, message: str) -> bool:
+    if message in MESSAGE_COMMAND:
+
+
+
+
+
+    payload = {
+        'chat_id': chat_id,
+        'text': message
+    }
+    headers = {'Content-Type': 'application/json'}
+
+    response = requests.request(
+        'POST', f'{settings.base_url}/sendMessage', json=payload, headers=headers)
+    status_code = response.status_code
+    response = json.loads(response.text)
+
+    if status_code == 200 and response['ok']:
+        return True
+    else:
+        return False
