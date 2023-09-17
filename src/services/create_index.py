@@ -4,7 +4,8 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from PyPDF2 import PdfReader
 
-from config import config
+from src.conf.config import settings
+
 
 def create_index(file_path: str) -> None:
     # Відкриваємо PDF-файл за вказаним шляхом
@@ -16,12 +17,12 @@ def create_index(file_path: str) -> None:
         text += page.extract_text()
 
     # Записуємо отриманий текст у файл output.txt у вказану директорію
-    with open(f'{config.OUTPUT_DIR}/output.txt', 'w', encoding='utf-8') as file:
+    with open(f'{settings.output_dir}/output.txt', 'w', encoding='utf-8') as file:
         file.write(text)
 
     # Завантажуємо тексти з файлів у вказаній директорії
     loader = DirectoryLoader(
-        config.OUTPUT_DIR,
+        settings.output_dir,
         glob='**/*.txt',
         loader_cls=TextLoader
     )
@@ -42,11 +43,11 @@ def create_index(file_path: str) -> None:
 
     # Ініціалізуємо об'єкт для векторизації тексту за допомогою OpenAI
     embeddings = OpenAIEmbeddings(
-    openai_api_key=config.OPENAI_API_KEY
+    openai_api_key=settings._ai_api_key
     )
 
     # Визначаємо директорію для збереження векторів
-    persist_directory = config.DB_DIR
+    persist_directory = settings.db_dir
 
     # Створюємо та зберігаємо індекс векторів Chroma
     vectordb = Chroma.from_documents(
