@@ -12,7 +12,7 @@ async def telegram(request: Request):
         print(body)
         sender_id = body['message']['from']['id']
         query = body['message']['text']
-        bot_logic(sender_id, query)
+        await bot_logic(sender_id, query)
         return 'OK', 200
     except Exception as e:
         print('Error at telegram...')

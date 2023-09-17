@@ -36,9 +36,9 @@ def set_webhook(url: str, secret_token: str = '') -> bool:
         return False
 
 
-def bot_logic(chat_id: int, message: str) -> bool:
+async def bot_logic(chat_id: int, message: str) -> bool:
     if message in MESSAGE_COMMAND.keys():
-        response = MESSAGE_COMMAND.get(message)(chat_id, message)
+        response = await MESSAGE_COMMAND.get(message)(chat_id, message)
 
         headers = {'Content-Type': 'application/json'}
 
@@ -78,7 +78,7 @@ def create_command_menu():
         return False
 
 
-def load_pdf(chat_id: int, message: str) -> tuple:
+async def load_pdf(chat_id: int, message: str) -> tuple:
     #TODO logic download pdf
     payload = {
         'chat_id': chat_id,
@@ -88,7 +88,7 @@ def load_pdf(chat_id: int, message: str) -> tuple:
     return payload, 'SendMessage'
 
 
-def choose_pdf(chat_id: int, message: str) -> tuple:
+async def choose_pdf(chat_id: int, message: str) -> tuple:
     #TODO logic choose pdf
     payload = {
         'chat_id': chat_id,
@@ -98,7 +98,7 @@ def choose_pdf(chat_id: int, message: str) -> tuple:
     return payload, 'SendMessage'
 
 
-def send_question(chat_id: int, message: str) -> tuple:
+async def send_question(chat_id: int, message: str) -> tuple:
     #TODO logic send question pdf
     payload = {
         'chat_id': chat_id,
@@ -108,7 +108,7 @@ def send_question(chat_id: int, message: str) -> tuple:
     return payload, 'SendMessage'
 
 
-def helps(chat_id: int, message: str) -> tuple:
+async def helps(chat_id: int, message: str) -> tuple:
     #TODO logic help
     payload = {
         'chat_id': chat_id,
