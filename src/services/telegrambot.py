@@ -36,60 +36,91 @@ def set_webhook(url: str, secret_token: str = '') -> bool:
         return False
 
 
-def send_message(chat_id: int, message: str) -> bool:
-    """
-    Send message to a Telegram user.
+def bot_logic(chat_id: int, message: str) -> bool:
+    if message in MESSAGE_COMMAND.keys():
+        response = MESSAGE_COMMAND.get(message)(chat_id, message)
 
-    Parameters:
-        - chat_id(int): chat id of the user
-        - message(str): text message to send
+        headers = {'Content-Type': 'application/json'}
 
-    Returns:
-        - bool: either 0 for error or 1 for success
-    """
+        response = requests.request(
+            'POST', f'{settings.base_url}/{response[1]}', json=response[0], headers=headers)
+        status_code = response.status_code
+        response = json.loads(response.text)
 
-    payload = {
-        'chat_id': chat_id,
-        'text': message
-    }
+        if status_code == 200 and response['ok']:
+            return True
+    else:
+        return False
+
+
+def create_command_menu():
     headers = {'Content-Type': 'application/json'}
 
-    response = requests.request(
-        'POST', f'{settings.base_url}/sendMessage', json=payload, headers=headers)
-    status_code = response.status_code
-    response = json.loads(response.text)
+    commands = [
+        {"command": "/load_pdf", "description": "Завантажити PDF"},
+        {"command": "/choose_pdf", "description": "Обрати ПДФ"},
+        {"command": "/send_question", "description": "Задати питання"},
+        {"command": "/helps", "description": "Допомога"}
+    ]
 
-    if status_code == 200 and response['ok']:
+    data = {"commands": commands}
+
+    response = requests.request(
+        'POST', f'{settings.base_url}/setMyCommands', json=data)
+    status_code = response.status_code
+    print(status_code)
+    response = json.loads(response.text)
+    print(response)
+
+    if status_code == 200:
         return True
     else:
         return False
+
+
+def load_pdf(chat_id: int, message: str) -> tuple:
+    #TODO logic download pdf
+    payload = {
+        'chat_id': chat_id,
+        'text': 'Пдф завантажено.......'
+    }
+
+    return payload, 'SendMessage'
+
+
+def choose_pdf(chat_id: int, message: str) -> tuple:
+    #TODO logic choose pdf
+    payload = {
+        'chat_id': chat_id,
+        'text': 'Пдф обрано для роботи.......'
+    }
+
+    return payload, 'SendMessage'
+
+
+def send_question(chat_id: int, message: str) -> tuple:
+    #TODO logic send question pdf
+    payload = {
+        'chat_id': chat_id,
+        'text': 'Відповідь на питання по ПДФ.......'
+    }
+
+    return payload, 'SendMessage'
+
+
+def helps(chat_id: int, message: str) -> tuple:
+    #TODO logic help
+    payload = {
+        'chat_id': chat_id,
+        'text': 'Коротка довідка по застосунку'
+    }
+
+    return payload, 'SendMessage'
 
 
 MESSAGE_COMMAND = {
-    'send_message': send_message,
+    '/load_pdf': load_pdf,
+    '/choose_pdf': choose_pdf,
+    '/send_question': send_question,
+    '/helps': helps,
 }
-
-
-
-def bot_logic(chat_id: int, message: str) -> bool:
-    if message in MESSAGE_COMMAND:
-
-
-
-
-
-    payload = {
-        'chat_id': chat_id,
-        'text': message
-    }
-    headers = {'Content-Type': 'application/json'}
-
-    response = requests.request(
-        'POST', f'{settings.base_url}/sendMessage', json=payload, headers=headers)
-    status_code = response.status_code
-    response = json.loads(response.text)
-
-    if status_code == 200 and response['ok']:
-        return True
-    else:
-        return False
