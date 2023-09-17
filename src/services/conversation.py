@@ -4,15 +4,17 @@ from langchain.chat_models import ChatOpenAI  # Імпорт бібліотек�
 from langchain.chains import ConversationalRetrievalChain  # Імпорт бібліотеки для створення ланцюжка обробки чат-взаємодії
 from langchain.memory import ConversationBufferMemory  # Імпорт бібліотеки для роботи з пам'яттю для зберігання історії розмови
 
-from config import config  # Імпорт конфігураційних налаштувань з файлу config.py
+# Імпорт конфігураційних налаштувань з файлу config.py
+from src.conf.config import settings
+
 
 def create_conversation() -> ConversationalRetrievalChain:
     # Встановлення шляху до папки для збереження даних
-    persist_directory = config.DB_DIR
+    persist_directory = settings.db_dir
 
     # Ініціалізація моделі для створення векторних представлень тексту від OpenAI
     embeddings = OpenAIEmbeddings(
-        openai_api_key=config.OPENAI_API_KEY
+        openai_api_key=settings._ai_api_key
     )
 
     # Ініціалізація бази даних для зберігання векторних представлень тексту

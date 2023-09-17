@@ -1,2 +1,6 @@
-TELEGRAM_TOKEN=
-BASE_URL=
+_AI_API_KEY = "AI_API_KEY"
+TELEGRAM_TOKEN = "TELE"
+BASE_URL="http://"
+DB_DIR = 'data/db'                                   # Директорія для бази даних
+INPUT_FILE_PATH = 'data/input/sample.pdf'            # Шлях до вхідного PDF-файлу
+OUTPUT_DIR = 'data/output'                           # Директорія для виводу даних
