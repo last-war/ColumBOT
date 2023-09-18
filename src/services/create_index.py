@@ -1,5 +1,5 @@
 from langchain.vectorstores.chroma import Chroma
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from PyPDF2 import PdfReader
@@ -42,9 +42,7 @@ def create_index(file_path: str) -> None:
     texts = text_splitter.split_documents(documents)
 
     # Ініціалізуємо об'єкт для векторизації тексту за допомогою OpenAI
-    embeddings = OpenAIEmbeddings(
-    openai_api_key=settings._ai_api_key
-    )
+    embeddings = HuggingFaceEmbeddings()
 
     # Визначаємо директорію для збереження векторів
     persist_directory = settings.db_dir

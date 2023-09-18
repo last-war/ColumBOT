@@ -19,7 +19,7 @@ def process_telegram_data(data: dict) -> dict:
     mime_type = ''
     
     if 'message' in data.keys():
-        message = data['mesage']
+        message = data['message']
         sender_id = message['from']['id']
         if 'text' in message.keys():
             text = message['text']
@@ -45,30 +45,30 @@ def process_telegram_data(data: dict) -> dict:
 def generate_text_response(text: str) -> str:
     
     if text == '/start':
-        return "Hi,  I can help you with saving you data to the clod and retive it, I can also help you with your questions."
+        return "Hi, I can help you with saving you data to the clod and retive it, I can also help you with your questions."
     if text == '/file':
-        return "Selected PDF document file that you want to querry."
+        return "Selected PDF document file that you want to query."
     if text == '/help':
-        return "I am an AI and I am here to help you. You can upload PDF files and once uploaded, you can querry them."
+        return "I am an AI and I am here to help you. You can upload PDF files and once uploaded, you can query them."
     
     '''TODO
     we can add chat history here...
     save all message in a DB
-    retrive when this function called
+    retrieve when this function called
     create chat history variable and pass it in the qa
     '''
     
     result = qa(
         {
             'question': text,
-            'chat_histoty': {}
+            'chat_history': {}
         }
     )
      
     try:
         return result['answers']
     except:
-        return 'We are facing some tecnical issue.'
+        return 'We are facing some technical issue.'
 
 
 def generate_file_response(file_id: str, mime_type: str, sender_id: str) -> str:
