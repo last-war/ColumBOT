@@ -33,6 +33,7 @@ class Doc(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship("User", back_populates="docs")
+    name = Column(String(), unique=False, nullable=False)
     description = Column(String(), unique=False, nullable=False)
     created_at = Column('created_at', DateTime, default=func.now())
     is_deleted = Column(Boolean, default=False)
