@@ -12,7 +12,7 @@ from src.services.create_index import create_index
 BASE_URL = f'https://api.telegram.org/bot{settings.telegram_token}'
 
 
-def set_webhook(url: str, secret_token: str = '') -> bool:
+async def set_webhook(url: str, secret_token: str = '') -> bool:
     """
     Set a url as a webhook to receive all incoming messages
 
@@ -126,7 +126,7 @@ async def load_pdf(chat_id: int, message: str, telegram_data: dict) -> tuple:
     return payload, 'SendMessage'
 
 
-async def choose_pdf(chat_id: int, message: str) -> tuple:
+async def choose_pdf(chat_id: int, message: str, telegram_data: dict) -> tuple:
     #TODO logic choose pdf
     payload = {
         'chat_id': chat_id,
@@ -136,7 +136,7 @@ async def choose_pdf(chat_id: int, message: str) -> tuple:
     return payload, 'SendMessage'
 
 
-async def send_question(chat_id: int, message: str) -> tuple:
+async def send_question(chat_id: int, message: str, telegram_data: dict) -> tuple:
     #TODO logic send question pdf
     payload = {
         'chat_id': chat_id,
@@ -146,7 +146,7 @@ async def send_question(chat_id: int, message: str) -> tuple:
     return payload, 'SendMessage'
 
 
-async def helps(chat_id: int, message: str) -> tuple:
+async def helps(chat_id: int, message: str, telegram_data: dict) -> tuple:
     #TODO logic help
     payload = {
         'chat_id': chat_id,
