@@ -12,7 +12,7 @@ from src.services.create_index import create_index
 BASE_URL = f'https://api.telegram.org/bot{settings.telegram_token}'
 
 
-def set_webhook(url: str, secret_token: str = '') -> bool:
+async def set_webhook(url: str, secret_token: str = '') -> bool:
     """
     Set a url as a webhook to receive all incoming messages
 
