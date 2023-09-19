@@ -6,6 +6,7 @@ from PyPDF2 import PdfReader, PdfFileReader
 
 from src.conf.config import settings
 
+
 def is_valid_pdf(file_path: str, password: str = None) -> bool:
     try:
         with open(file_path, 'rb') as file:
@@ -21,6 +22,7 @@ def is_valid_pdf(file_path: str, password: str = None) -> bool:
             return True
     except Exception as e:
         return False
+
 
 def create_index(file_path: str, password: str = None) -> None:
     if not is_valid_pdf(file_path, password):

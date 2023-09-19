@@ -1,5 +1,6 @@
 # ColumBOT
  GoIT DataScience team5
+- BOT name ai_Colum_bot
 
 - install for https webhook telegram linux ->`snap install ngrok` if win or mac -> off documentation
 - add key ngrok `ngrok config add-authtoken <key>`
