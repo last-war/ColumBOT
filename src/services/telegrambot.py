@@ -4,8 +4,13 @@ import tempfile
 import uuid
 
 import requests
+from fastapi import Depends
+from sqlalchemy.orm import Session
 
 from src.conf.config import settings
+from src.database.db import get_db
+from src.repository.users import get_user_by_user_id, create_user
+from src.schemas.users import UserModel
 from src.services.create_index import create_index
 
 
@@ -43,10 +48,10 @@ async def set_webhook(url: str, secret_token: str = '') -> bool:
         return False
 
 
-async def bot_logic(chat_id: int, message: str, telegram_data: dict) -> bool:
+async def bot_logic(chat_id: int, message: str, telegram_data: dict, db: Session) -> bool:
     if message in MESSAGE_COMMAND.keys():
 
-        response = await MESSAGE_COMMAND.get(message)(chat_id, message, telegram_data)
+        response = await MESSAGE_COMMAND.get(message)(chat_id, message, telegram_data, db)
 
         headers = {'Content-Type': 'application/json'}
 
@@ -86,7 +91,26 @@ def create_command_menu():
         return False
 
 
-async def load_pdf(chat_id: int, message: str, telegram_data: dict) -> tuple:
+async def start(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
+    payload = {
+        'chat_id': chat_id,
+        'text': 'Привіт друже, це АІ бот який допоможе тобі знайти відповідь на питання. Просто завантаж ПДФ.'
+    }
+    print('telegram data ----> \n' + str(telegram_data))
+    user = await get_user_by_user_id(chat_id, db)
+    if user:
+        return payload, 'SendMessage'
+    elif not user:
+        await create_user(UserModel(user_id=telegram_data['sender_id'],
+                                    is_bot=telegram_data['is_bot'],
+                                    first_name=telegram_data['first_name'],
+                                    username=telegram_data['username']), db)
+        print('Create user')
+
+        return payload, 'SendMessage'
+
+
+async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
 
     if 'pdf' not in telegram_data['mime_type']:
         payload = {
@@ -126,7 +150,7 @@ async def load_pdf(chat_id: int, message: str, telegram_data: dict) -> tuple:
     return payload, 'SendMessage'
 
 
-async def choose_pdf(chat_id: int, message: str, telegram_data: dict) -> tuple:
+async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
     #TODO logic choose pdf
     payload = {
         'chat_id': chat_id,
@@ -136,7 +160,7 @@ async def choose_pdf(chat_id: int, message: str, telegram_data: dict) -> tuple:
     return payload, 'SendMessage'
 
 
-async def send_question(chat_id: int, message: str, telegram_data: dict) -> tuple:
+async def send_question(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
     #TODO logic send question pdf
     payload = {
         'chat_id': chat_id,
@@ -146,7 +170,7 @@ async def send_question(chat_id: int, message: str, telegram_data: dict) -> tupl
     return payload, 'SendMessage'
 
 
-async def helps(chat_id: int, message: str, telegram_data: dict) -> tuple:
+async def helps(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
     #TODO logic help
     payload = {
         'chat_id': chat_id,
@@ -157,6 +181,7 @@ async def helps(chat_id: int, message: str, telegram_data: dict) -> tuple:
 
 
 MESSAGE_COMMAND = {
+    '/start': start,
     '/load_pdf': load_pdf,
     '/choose_pdf': choose_pdf,
     '/send_question': send_question,
