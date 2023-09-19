@@ -10,12 +10,10 @@ router = APIRouter(prefix="/telegram", tags=["telegram"])
 async def telegram(request: Request):
     try:
         body = await request.json()
-        print(body)
         telegram_data = process_telegram_data(body)
-        sender_id = body['message']['from']['id']
-        query = body['message']['text']
-        await bot_logic(sender_id, query, telegram_data)
-        return 'OK', 200
+        rez = await bot_logic(telegram_data)
+        if rez:
+            return 'OK', 200
     except Exception as e:
         print('Error at telegram...')
         print(e)
