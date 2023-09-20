@@ -2,7 +2,7 @@ from langchain.vectorstores.chroma import Chroma
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import DirectoryLoader, TextLoader
-from PyPDF2 import PdfReader, PdfFileReader
+from PyPDF2 import PdfReader
 
 from src.conf.config import settings
 
@@ -21,6 +21,7 @@ def is_valid_pdf(file_path: str, password: str = None) -> bool:
                     return False
             return True
     except Exception as e:
+        print(e)
         return False
 
 

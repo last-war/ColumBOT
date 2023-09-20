@@ -51,6 +51,9 @@ async def set_webhook(url: str, secret_token: str = '') -> bool:
 async def bot_logic(telegram_data: dict, db: Session) -> bool:
     if 'application/pdf' in telegram_data['mime_type']:
         load_pdf(telegram_data['text'])(telegram_data['sender_id'], telegram_data['text'], telegram_data, db)
+
+        # TODO записати в пост базу картку документу
+
         payload = {
             'chat_id': telegram_data['sender_id'],
             'text': "The bot can only understand PDF files"
@@ -75,14 +78,13 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
     else:
         #TODO отримати перелік доків з бази
 
-        #обробити питання
+        #TODO обробити питання користувача
         payload = {
             'chat_id': telegram_data['text'],
             'text': 'Відповідь на питання по ПДФ.......'
         }
 
         return payload, 'SendMessage'
-
 
 
 
@@ -153,6 +155,8 @@ async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session)
             file.close()
 
         create_index(local_file_path)
+        # Create  doc in postgres database
+
         os.unlink(local_file_path)
 
 
@@ -165,7 +169,6 @@ async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session)
 
 
 async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
-    #TODO logic choose pdf
     payload = {
         'chat_id': chat_id,
         'text': 'Пдф обрано для роботи.......'
@@ -175,7 +178,6 @@ async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Sessio
 
 
 async def send_question(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
-    #TODO logic send question pdf
     payload = {
         'chat_id': chat_id,
         'text': 'Відповідь на питання по ПДФ.......'
