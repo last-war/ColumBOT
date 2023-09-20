@@ -24,7 +24,8 @@ def process_telegram_data(data: dict) -> dict:
             is_text = True
             is_unknown = False
         if 'document' in message.keys():
-            text = message['caption']
+            if 'caption' in message.keys():
+                text = message['caption']
             file_id = message['document']['file_id']
             mime_type = message['document']['mime_type']
             is_document = True

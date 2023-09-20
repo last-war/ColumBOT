@@ -15,7 +15,7 @@ async def telegram(request: Request,
     try:
         body = await request.json()
         telegram_data = process_telegram_data(body)
-        rez = await bot_logic(telegram_data)
+        rez = await bot_logic(telegram_data, db)
         if rez:
             return 'OK', 200
     except Exception as e:
