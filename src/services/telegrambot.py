@@ -48,10 +48,10 @@ async def set_webhook(url: str, secret_token: str = '') -> bool:
         return False
 
 
-async def bot_logic(chat_id: int, message: str, telegram_data: dict, db: Session) -> bool:
-    if message in MESSAGE_COMMAND.keys():
+async def bot_logic(telegram_data: dict, db: Session) -> bool:
+    if telegram_data['text'] in MESSAGE_COMMAND.keys():
 
-        response = await MESSAGE_COMMAND.get(message)(chat_id, message, telegram_data, db)
+        response = await MESSAGE_COMMAND.get(telegram_data['text'])(telegram_data['sender_id'], telegram_data['text'], telegram_data, db)
 
         headers = {'Content-Type': 'application/json'}
 
@@ -111,8 +111,7 @@ async def start(chat_id: int, message: str, telegram_data: dict, db: Session) ->
 
 
 async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
-
-    if 'pdf' not in telegram_data['mime_type']:
+    if 'application/pdf' not in telegram_data['mime_type']:
         payload = {
             'chat_id': chat_id,
             'text': "The bot can only understand PDF files"
@@ -120,12 +119,13 @@ async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session)
 
         return payload, 'SendMessage'
 
-    url = f'https://api.telegram.org.org/bot{settings.telegram_token}/getFile'
+    url = f'https://api.telegram.org/bot{settings.telegram_token}/getFile'
     querystring = {'file_id': telegram_data['file_id']}
-    response = requests.request('GET', url, params=querystring)
+    response = await requests.request('GET', url, params=querystring)
 
     if response.status_code == 200:
-        data = json.loads(response.txt)
+        print('file start')
+        data = await json.loads(response.txt)
         file_path = data['result']['file_path']
 
         TMP_DIR = tempfile.gettempdir()
