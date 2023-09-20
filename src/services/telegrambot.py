@@ -121,11 +121,12 @@ async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session)
 
     url = f'https://api.telegram.org/bot{settings.telegram_token}/getFile'
     querystring = {'file_id': telegram_data['file_id']}
-    response = await requests.request('GET', url, params=querystring)
+    response = requests.request('GET', url, params=querystring)
 
     if response.status_code == 200:
         print('file start')
-        data = await json.loads(response.txt)
+        print(response.text)
+        data = json.loads(response.text)
         file_path = data['result']['file_path']
 
         TMP_DIR = tempfile.gettempdir()
