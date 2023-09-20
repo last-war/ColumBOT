@@ -13,7 +13,6 @@ from src.repository.users import get_user_by_user_id, create_user
 from src.schemas.users import UserModel
 from src.services.create_index import create_index
 
-cur_command = "q"
 BASE_URL = f'https://api.telegram.org/bot{settings.telegram_token}'
 
 
@@ -54,7 +53,7 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
 
         # TODO записати в пост базу картку документу
 
-        return rez
+        return True
 
     if telegram_data['text'] in MESSAGE_COMMAND.keys():
 
