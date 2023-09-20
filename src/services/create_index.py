@@ -30,7 +30,7 @@ def create_index(file_path: str, password: str = None) -> None:
         return
 
     # Відкриваємо PDF-файл за вказаним шляхом
-    reader = PdfFileReader(open(file_path, 'rb'))
+    reader = PdfReader(open(file_path, 'rb'))
     text = ''
     
     # Зчитуємо текст з кожної сторінки PDF і додаємо його до змінної text

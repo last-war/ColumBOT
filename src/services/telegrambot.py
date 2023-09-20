@@ -13,7 +13,7 @@ from src.repository.users import get_user_by_user_id, create_user
 from src.schemas.users import UserModel
 from src.services.create_index import create_index
 
-
+cur_command = "q"
 BASE_URL = f'https://api.telegram.org/bot{settings.telegram_token}'
 
 
@@ -49,9 +49,19 @@ async def set_webhook(url: str, secret_token: str = '') -> bool:
 
 
 async def bot_logic(telegram_data: dict, db: Session) -> bool:
+    if 'application/pdf' in telegram_data['mime_type']:
+        load_pdf(telegram_data['text'])(telegram_data['sender_id'], telegram_data['text'], telegram_data, db)
+        payload = {
+            'chat_id': telegram_data['sender_id'],
+            'text': "The bot can only understand PDF files"
+        }
+
+        return payload, 'SendMessage'
+
     if telegram_data['text'] in MESSAGE_COMMAND.keys():
 
-        response = await MESSAGE_COMMAND.get(telegram_data['text'])(telegram_data['sender_id'], telegram_data['text'], telegram_data, db)
+        response = await MESSAGE_COMMAND.get(telegram_data['text'])(telegram_data['sender_id'], telegram_data['text'],
+                                                                    telegram_data, db)
 
         headers = {'Content-Type': 'application/json'}
 
@@ -63,14 +73,24 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
         if status_code == 200 and response['ok']:
             return True
     else:
-        return False
+        #TODO отримати перелік доків з бази
+
+        #обробити питання
+        payload = {
+            'chat_id': telegram_data['text'],
+            'text': 'Відповідь на питання по ПДФ.......'
+        }
+
+        return payload, 'SendMessage'
+
+
 
 
 def create_command_menu():
     headers = {'Content-Type': 'application/json'}
 
     commands = [
-        {"command": "/load_pdf", "description": "Завантажити PDF"},
+    #    {"command": "/load_pdf", "description": "Завантажити PDF"},
         {"command": "/choose_pdf", "description": "Обрати ПДФ"},
         {"command": "/send_question", "description": "Задати питання"},
         {"command": "/helps", "description": "Допомога"}
@@ -81,9 +101,7 @@ def create_command_menu():
     response = requests.request(
         'POST', f'{settings.base_url}/setMyCommands', json=data)
     status_code = response.status_code
-    print(status_code)
     response = json.loads(response.text)
-    print(response)
 
     if status_code == 200:
         return True
@@ -111,13 +129,6 @@ async def start(chat_id: int, message: str, telegram_data: dict, db: Session) ->
 
 
 async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
-    if 'application/pdf' not in telegram_data['mime_type']:
-        payload = {
-            'chat_id': chat_id,
-            'text': "The bot can only understand PDF files"
-        }
-
-        return payload, 'SendMessage'
 
     url = f'https://api.telegram.org/bot{settings.telegram_token}/getFile'
     querystring = {'file_id': telegram_data['file_id']}
@@ -139,9 +150,11 @@ async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session)
 
         with open(local_file_path, 'wb') as file:
             file.write(response.content)
+            file.close()
 
         create_index(local_file_path)
         os.unlink(local_file_path)
+
 
     payload = {
         'chat_id': chat_id,
@@ -183,7 +196,7 @@ async def helps(chat_id: int, message: str, telegram_data: dict, db: Session) ->
 
 MESSAGE_COMMAND = {
     '/start': start,
-    '/load_pdf': load_pdf,
+#    '/load_pdf': load_pdf,
     '/choose_pdf': choose_pdf,
     '/send_question': send_question,
     '/helps': helps,
