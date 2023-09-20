@@ -17,7 +17,7 @@ class Model(enum.Enum):
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
-    user_id = Column(String(), unique=True, nullable=False)
+    user_id = Column(Integer, unique=True, nullable=False)
     is_bot = Column(Boolean, default=False, nullable=True)
     first_name = Column(String(), unique=False, nullable=False)
     username = Column(String(), unique=False, nullable=False)

@@ -1,6 +1,8 @@
-from fastapi import APIRouter, Request, HTTPException, status
+from fastapi import APIRouter, Request, HTTPException, status, Depends
 
-from src.schemas.telegrambot import WebhookModel, WebhookResponse
+from sqlalchemy.orm import Session
+from src.database.db import get_db
+from src.schemas.telegrambot import WebhookModel
 from src.services.telegrambot import set_webhook, bot_logic
 from src.services.utils import process_telegram_data
 
@@ -8,7 +10,8 @@ router = APIRouter(prefix="/telegram", tags=["telegram"])
 
 
 @router.post('/bot')
-async def telegram(request: Request):
+async def telegram(request: Request,
+                   db: Session = Depends(get_db)):
     try:
         body = await request.json()
         telegram_data = process_telegram_data(body)
