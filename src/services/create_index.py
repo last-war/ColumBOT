@@ -35,8 +35,8 @@ def create_index(file_path: str, password: str = None) -> None:
     text = ''
     
     # Зчитуємо текст з кожної сторінки PDF і додаємо його до змінної text
-    for page in range(reader.getNumPages()):
-        text += reader.getPage(page).extract_text()
+    for page in range(len(reader.pages)):
+        text += reader.pages[page].extract_text()
 
     # Записуємо отриманий текст у файл output.txt у вказану директорію
     with open(f'{settings.output_dir}/output.txt', 'w', encoding='utf-8') as file:

@@ -50,16 +50,11 @@ async def set_webhook(url: str, secret_token: str = '') -> bool:
 
 async def bot_logic(telegram_data: dict, db: Session) -> bool:
     if 'application/pdf' in telegram_data['mime_type']:
-        load_pdf(telegram_data['text'])(telegram_data['sender_id'], telegram_data['text'], telegram_data, db)
+        rez = await load_pdf(telegram_data['sender_id'], telegram_data, db)
 
         # TODO записати в пост базу картку документу
 
-        payload = {
-            'chat_id': telegram_data['sender_id'],
-            'text': "The bot can only understand PDF files"
-        }
-
-        return payload, 'SendMessage'
+        return rez
 
     if telegram_data['text'] in MESSAGE_COMMAND.keys():
 
@@ -85,7 +80,6 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
         }
 
         return payload, 'SendMessage'
-
 
 
 def create_command_menu():
@@ -130,18 +124,15 @@ async def start(chat_id: int, message: str, telegram_data: dict, db: Session) ->
         return payload, 'SendMessage'
 
 
-async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
-
+async def load_pdf(chat_id: int, telegram_data: dict, db: Session) -> tuple:
     url = f'https://api.telegram.org/bot{settings.telegram_token}/getFile'
     querystring = {'file_id': telegram_data['file_id']}
     response = requests.request('GET', url, params=querystring)
-
     if response.status_code == 200:
-        print('file start')
-        print(response.text)
         data = json.loads(response.text)
         file_path = data['result']['file_path']
-
+        url = f'https://api.telegram.org/file/bot{settings.telegram_token}/{file_path}'
+        response = requests.request('GET', url)
         TMP_DIR = tempfile.gettempdir()
         extention = file_path.split('.')[-1]
         file_name = f'{uuid.uuid1()}.{extention}'
@@ -149,15 +140,14 @@ async def load_pdf(chat_id: int, message: str, telegram_data: dict, db: Session)
             TMP_DIR,
             file_name
         )
+        if response.status_code == 200:
+            with open(local_file_path, 'wb') as file:
+                file.write(response.content)
+                file.close()
+            create_index(local_file_path)
+            # Create  doc in postgres database
 
-        with open(local_file_path, 'wb') as file:
-            file.write(response.content)
-            file.close()
-
-        create_index(local_file_path)
-        # Create  doc in postgres database
-
-        os.unlink(local_file_path)
+            os.unlink(local_file_path)
 
 
     payload = {
