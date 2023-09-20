@@ -1,4 +1,4 @@
-from src.services.conversation import create_conversation
+from src.services.falcon_llm import create_conversation
 
 qa = create_conversation()
 
