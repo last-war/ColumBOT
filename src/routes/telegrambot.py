@@ -10,10 +10,10 @@ router = APIRouter(prefix="/telegram", tags=["telegram"])
 
 
 @router.post('/bot')
-async def telegram(request: Request,
-                   db: Session = Depends(get_db)):
+async def telegram(request: Request, db: Session = Depends(get_db)):
     try:
         body = await request.json()
+        print(body)
         telegram_data = process_telegram_data(body)
         rez = await bot_logic(telegram_data, db)
         if rez:
