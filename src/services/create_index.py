@@ -28,22 +28,15 @@ def is_valid_pdf(file_path: str, password: str = None) -> bool:
         return False
 
 
-async def create_index(file_path: str, telegram_data: dict, file_name: str, db: Session, password: str = None) -> None:
+async def create_index(file_path: str, sender_id: int, file_name: str, db: Session, password: str = None) -> None:
     print('pdf check')
     if not is_valid_pdf(file_path, password):
         print("Неприпустимий PDF-файл з вкладеними скриптами або невірним паролем.")
         return
-    print('pdf load index')
+    print(f'{file_path} load index')
     print('# Відкриваємо PDF-файл за вказаним шляхом')
     reader = PdfReader(open(file_path, 'rb'))
     text = ''
-
-    # Зберегти документ в базу постгреc
-    #doc = await create_doc(telegram_data['sender_id'], file_name, text, db)
-    #user_use_docs = await get_use_docs(telegram_data['sender_id'], db)
-    # Якщо список обраних документів юзера пустий додаємо йому ід цього документу до списку.
-    #if user_use_docs == 0:
-    #    await user_add_use_docs(telegram_data['sender_id'], doc.id, db)
 
     # Записуємо отриманий текст у файл output.txt у вказану директорію
     print('# Зчитуємо текст з кожної сторінки PDF і додаємо його до змінної text')
@@ -53,6 +46,13 @@ async def create_index(file_path: str, telegram_data: dict, file_name: str, db: 
     print('# Записуємо отриманий текст у файл output.txt у вказану директорію')
     with open(f'{settings.output_dir}/output.txt', 'w', encoding='utf-8') as file:
         file.write(text)
+
+    # Зберегти документ в базу постгреc
+    doc = await create_doc(sender_id, file_name, text, db)
+    user_use_docs = await get_use_docs(sender_id, db)
+    # Якщо список обраних документів юзера пустий додаємо йому ід цього документу до списку.
+    if user_use_docs == 0:
+        await user_add_use_docs(sender_id, doc.id, db)
 
     print('# Завантажуємо тексти з файлів у вказаній директорії')
     loader = DirectoryLoader(

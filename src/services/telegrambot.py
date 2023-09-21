@@ -50,11 +50,18 @@ async def set_webhook(url: str, secret_token: str = '') -> bool:
 
 async def bot_logic(telegram_data: dict, db: Session) -> bool:
     if 'application/pdf' in telegram_data['mime_type']:
-        await load_pdf(telegram_data['sender_id'], telegram_data, db)
+        payload = await load_pdf(telegram_data['sender_id'], telegram_data, db)
 
-        # TODO записати в пост базу картку документу
+        headers = {'Content-Type': 'application/json'}
+        response = requests.request(
+            'POST', f'{settings.base_url}/{payload[1]}', json=payload[0], headers=headers)
+        status_code = response.status_code
+        response = json.loads(response.text)
 
-        return True
+        if status_code == 200 and response['ok']:
+            return True
+        else:
+            return False
 
     if telegram_data['text'] in MESSAGE_COMMAND.keys():
 
@@ -88,7 +95,7 @@ def create_command_menu():
     commands = [
     #    {"command": "/load_pdf", "description": "Завантажити PDF"},
         {"command": "/choose_pdf", "description": "Обрати ПДФ"},
-        {"command": "/send_question", "description": "Задати питання"},
+    #    {"command": "/send_question", "description": "Задати питання"},
         {"command": "/helps", "description": "Допомога"}
     ]
 
@@ -145,14 +152,14 @@ async def load_pdf(chat_id: int, telegram_data: dict, db: Session) -> tuple:
             with open(local_file_path, 'wb') as file:
                 file.write(response.content)
                 file.close()
-            await create_index(local_file_path, telegram_data=telegram_data['sender_id'], file_name=file_name, db=db)
+            await create_index(local_file_path, sender_id=telegram_data['sender_id'], file_name=file_name, db=db)
             # Create  doc in postgres database
             print(local_file_path)
             os.unlink(local_file_path)
 
     payload = {
-        'chat_id': chat_id,
-        'text': 'Пдф завантажено.......'
+        'chat_id': telegram_data['sender_id'],
+        'text': 'Файл прийнято, задавайте Ваше питання'
     }
 
     return payload, 'SendMessage'
@@ -162,15 +169,6 @@ async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Sessio
     payload = {
         'chat_id': chat_id,
         'text': 'Пдф обрано для роботи.......'
-    }
-
-    return payload, 'SendMessage'
-
-
-async def send_question(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
-    payload = {
-        'chat_id': chat_id,
-        'text': 'Відповідь на питання по ПДФ.......'
     }
 
     return payload, 'SendMessage'
