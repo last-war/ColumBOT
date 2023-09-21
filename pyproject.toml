@@ -24,6 +24,10 @@ update = "^0.0.1"
 chromadb = "0.3.26"
 pyarrow = "^13.0.0"
 sqlalchemy = "^2.0.21"
+transformers = "^4.33.2"
+einops = "^0.6.1"
+accelerate = "^0.23.0"
+bitsandbytes = "^0.41.1"
 
 
 [build-system]

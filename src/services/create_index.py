@@ -39,11 +39,11 @@ async def create_index(file_path: str, telegram_data: dict, file_name: str, db: 
     text = ''
 
     # Зберегти документ в базу постгреc
-    doc = await create_doc(telegram_data['sender_id'], file_name, text, db)
-    user_use_docs = await get_use_docs(telegram_data['sender_id'], db)
+    #doc = await create_doc(telegram_data['sender_id'], file_name, text, db)
+    #user_use_docs = await get_use_docs(telegram_data['sender_id'], db)
     # Якщо список обраних документів юзера пустий додаємо йому ід цього документу до списку.
-    if user_use_docs == 0:
-        await user_add_use_docs(telegram_data['sender_id'], doc.id, db)
+    #if user_use_docs == 0:
+    #    await user_add_use_docs(telegram_data['sender_id'], doc.id, db)
 
     # Записуємо отриманий текст у файл output.txt у вказану директорію
     print('# Зчитуємо текст з кожної сторінки PDF і додаємо його до змінної text')
