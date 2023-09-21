@@ -50,7 +50,7 @@ async def set_webhook(url: str, secret_token: str = '') -> bool:
 
 async def bot_logic(telegram_data: dict, db: Session) -> bool:
     if 'application/pdf' in telegram_data['mime_type']:
-        rez = await load_pdf(telegram_data['sender_id'], telegram_data, db)
+        await load_pdf(telegram_data['sender_id'], telegram_data, db)
 
         # TODO записати в пост базу картку документу
 
@@ -125,7 +125,6 @@ async def start(chat_id: int, message: str, telegram_data: dict, db: Session) ->
 
 
 async def load_pdf(chat_id: int, telegram_data: dict, db: Session) -> tuple:
-    print('Loading pdf')
     url = f'https://api.telegram.org/bot{settings.telegram_token}/getFile'
     querystring = {'file_id': telegram_data['file_id']}
     response = requests.request('GET', url, params=querystring)
@@ -146,11 +145,10 @@ async def load_pdf(chat_id: int, telegram_data: dict, db: Session) -> tuple:
             with open(local_file_path, 'wb') as file:
                 file.write(response.content)
                 file.close()
-            create_index(local_file_path)
+            await create_index(local_file_path, telegram_data=telegram_data['sender_id'], file_name=file_name, db=db)
             # Create  doc in postgres database
             print(local_file_path)
             os.unlink(local_file_path)
-
 
     payload = {
         'chat_id': chat_id,

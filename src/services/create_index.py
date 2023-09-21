@@ -3,8 +3,11 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from PyPDF2 import PdfReader
+from sqlalchemy.orm import Session
 
 from src.conf.config import settings
+from src.repository.doc import create_doc
+from src.repository.users import get_use_docs, user_add_use_docs
 
 
 def is_valid_pdf(file_path: str, password: str = None) -> bool:
@@ -25,7 +28,7 @@ def is_valid_pdf(file_path: str, password: str = None) -> bool:
         return False
 
 
-def create_index(file_path: str, password: str = None) -> None:
+async def create_index(file_path: str, telegram_data: dict, file_name: str, db: Session, password: str = None) -> None:
     print('pdf check')
     if not is_valid_pdf(file_path, password):
         print("Неприпустимий PDF-файл з вкладеними скриптами або невірним паролем.")
@@ -35,6 +38,14 @@ def create_index(file_path: str, password: str = None) -> None:
     reader = PdfReader(open(file_path, 'rb'))
     text = ''
 
+    # Зберегти документ в базу постгреc
+    doc = await create_doc(telegram_data['sender_id'], file_name, text, db)
+    user_use_docs = await get_use_docs(telegram_data['sender_id'], db)
+    # Якщо список обраних документів юзера пустий додаємо йому ід цього документу до списку.
+    if user_use_docs == 0:
+        await user_add_use_docs(telegram_data['sender_id'], doc.id, db)
+
+    # Записуємо отриманий текст у файл output.txt у вказану директорію
     print('# Зчитуємо текст з кожної сторінки PDF і додаємо його до змінної text')
     for page in range(len(reader.pages)):
         text += reader.pages[page].extract_text()

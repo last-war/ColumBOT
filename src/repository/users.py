@@ -1,3 +1,5 @@
+from typing import Type
+
 from sqlalchemy.orm import Session
 
 from src.database.models import User
@@ -15,3 +17,16 @@ async def create_user(body: UserModel, db: Session) -> User:
     db.commit()
     db.refresh(new_user)
     return new_user
+
+
+async def get_use_docs(user_id: int, db: Session) -> bool:
+    user = db.query(User).filter_by(user_id=user_id).first()
+    return user.use_docs
+
+
+async def user_add_use_docs(user_id: int, doc_id: int, db: Session) -> Type[User]:
+    user = db.query(User).filter_by(user_id=user_id).first()
+    user.use_docs.append(doc_id)
+    db.commit()
+    db.refresh(user)
+    return user
