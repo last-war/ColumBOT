@@ -1,4 +1,4 @@
-from langchain.vectorstores.chroma import Chroma
+from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import DirectoryLoader, TextLoader
@@ -82,13 +82,16 @@ async def create_index(file_path: str, telegram_data: dict, file_name: str, db: 
     persist_directory = settings.db_dir
 
     print('# Створюємо та зберігаємо індекс векторів Chroma')
+
+    print('embeddings')
+    print(embeddings)
+    print(persist_directory)
     vectordb = Chroma.from_documents(
         documents=texts,
         embedding=embeddings,
         persist_directory=persist_directory
     )
-    try:
-        print('# Зберігаємо створений індекс')
-        vectordb.persist()
-    except Exception as e:
-        print(e)
+    print('# Зберігаємо створений індекс')
+    #vectordb.persist()
+    #vectordb = None
+
