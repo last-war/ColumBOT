@@ -2,7 +2,7 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    _hf_api_key: str = "HF_API_KEY"
+    hf_api_key: str = "hf_"
     telegram_token: str = "TELE"
     base_url: str = "http://"
     db_dir: str = 'data/db'  # Директорія для бази даних

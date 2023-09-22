@@ -83,26 +83,25 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
     else:
         #TODO отримати перелік доків з бази
         model = "falcon"
-        #model = "dolly"
+        model = "dolly"
         try:
             if model == "falcon":
                 print('falcon')
                 qa = create_falcon_conversation()
                 q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
-                print(q_text.keys())
             else:
                 print('dolly')
                 qa = create_dolly_conversation()
-                q_text = qa({'question': telegram_data['text'], })
-        except:
+                q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
+
+        except Exception as e:
             print('exception')
-            q_text = {'answer': 'Помилка отримання з моделі'}
+            q_text = {'answer': e}
 
         payload = {
             'chat_id': telegram_data['sender_id'],
             'text': f"Відповідь на питання {telegram_data['text']}: {q_text['answer']}",
         }
-        print(payload)
         headers = {'Content-Type': 'application/json'}
         response = requests.request(
             'POST', f'{settings.base_url}/SendMessage', json=payload, headers=headers)

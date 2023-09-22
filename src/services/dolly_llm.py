@@ -13,11 +13,10 @@ def create_conversation() -> ConversationalRetrievalChain:
     persist_directory = settings.db_dir
     repo_id = "databricks/dolly-v2-3b"
     # Ініціалізація моделі для text-generation
-    llm_model = HuggingFaceHub(huggingfacehub_api_token=settings._hf_api_key,
+    llm_model = HuggingFaceHub(huggingfacehub_api_token=settings.hf_api_key,
                                repo_id=repo_id,
                                model_kwargs={"temperature": 0.6,
                                              "max_new_tokens": 64})
-
     # Ініціалізація моделі для створення векторних представлень тексту
     embeddings = HuggingFaceEmbeddings()
 

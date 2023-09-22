@@ -14,7 +14,7 @@ def create_conversation() -> ConversationalRetrievalChain:
 
     # Ініціалізація моделі для створення векторних представлень тексту від OpenAI
     embeddings = OpenAIEmbeddings(
-        openai_api_key=settings._ai_api_key
+        openai_api_key=settings.ai_api_key
     )
 
     # Ініціалізація бази даних для зберігання векторних представлень тексту
