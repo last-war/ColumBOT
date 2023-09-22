@@ -1,7 +1,3 @@
-from src.services.falcon_llm import create_conversation
-
-qa = create_conversation()
-
 
 def process_telegram_data(data: dict) -> dict:
     

@@ -86,6 +86,8 @@ async def create_index(file_path: str, sender_id: int, file_name: str, db: Sessi
     print(embeddings)
     print(persist_directory)
 
+
+
     vectordb = Chroma.from_documents(
         documents=texts,
         embedding=embeddings,

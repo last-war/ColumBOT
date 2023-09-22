@@ -12,6 +12,9 @@ from src.database.db import get_db
 from src.repository.users import get_user_by_user_id, create_user
 from src.schemas.users import UserModel
 from src.services.create_index import create_index
+from src.services.falcon_llm import create_conversation as create_falcon_conversation
+from src.services.dolly_llm import create_conversation as create_dolly_conversation
+
 
 BASE_URL = f'https://api.telegram.org/bot{settings.telegram_token}'
 
@@ -79,14 +82,26 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
             return True
     else:
         #TODO отримати перелік доків з бази
+        model = "falcon"
+        model = "dolly"
+        try:
+            if model == "falcon":
+                print('falcon')
+                qa = create_falcon_conversation()
+                q_text = qa({'question': telegram_data['text'], })
+            else:
+                print('dolly')
+                qa = create_dolly_conversation()
+                q_text = qa({'question': telegram_data['text'], })
+        except:
+            print('exception')
+            q_text = {'answer': 'Помилка отримання з моделі'}
 
-        #TODO обробити питання користувача
-        q_text = telegram_data['text']
         payload = {
             'chat_id': telegram_data['sender_id'],
-            'text': f'Відповідь на питання {q_text} по ПДФ.......'
+            'text': f"Відповідь на питання {telegram_data['text']}: {q_text['answer']}",
         }
-
+        print(payload)
         headers = {'Content-Type': 'application/json'}
         response = requests.request(
             'POST', f'{settings.base_url}/SendMessage', json=payload, headers=headers)
@@ -103,9 +118,7 @@ def create_command_menu():
     headers = {'Content-Type': 'application/json'}
 
     commands = [
-    #    {"command": "/load_pdf", "description": "Завантажити PDF"},
         {"command": "/choose_pdf", "description": "Обрати ПДФ"},
-    #    {"command": "/send_question", "description": "Задати питання"},
         {"command": "/helps", "description": "Допомога"}
     ]
 
