@@ -9,7 +9,8 @@ from sqlalchemy.orm import Session
 
 from src.conf.config import settings
 from src.database.db import get_db
-from src.repository.users import get_user_by_user_id, create_user
+from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
+    set_user_openai_model
 from src.schemas.users import UserModel
 from src.services.create_index import create_index
 from src.services.falcon_llm import create_conversation as create_falcon_conversation
@@ -80,6 +81,31 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
 
         if status_code == 200 and response['ok']:
             return True
+
+    if telegram_data['is_data']:
+        model_ = 'Помилка. Модель не обрано...'
+        if telegram_data['data'] in 'falcon_model':
+            model_ = await set_user_falcon_model(telegram_data['sender_id'], db)
+        elif telegram_data['data'] in 'dolly_model':
+            model_ = await set_user_dolly_model(telegram_data['sender_id'], db)
+        elif telegram_data['data'] in 'openai_model':
+            model_ = await set_user_openai_model(telegram_data['sender_id'], db)
+
+        payload = {
+                'chat_id': telegram_data['sender_id'],
+                'text': f'Ви обрали модель: {str(model_.name)}.'
+            }
+
+        headers = {'Content-Type': 'application/json'}
+
+        response = requests.request(
+            'POST', f'{settings.base_url}/SendMessage', json=payload, headers=headers)
+        status_code = response.status_code
+        response = json.loads(response.text)
+
+        if status_code == 200 and response['ok']:
+            return True
+
     else:
         #TODO отримати перелік доків з бази
         model = "falcon"
@@ -118,6 +144,7 @@ def create_command_menu():
     headers = {'Content-Type': 'application/json'}
 
     commands = [
+        {"command": "/choose_model", "description": "Обрати модель"},
         {"command": "/choose_pdf", "description": "Обрати ПДФ"},
         {"command": "/helps", "description": "Допомога"}
     ]
@@ -198,9 +225,20 @@ async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Sessio
 
 
 async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
+    keyboard = {
+        'inline_keyboard': [
+            [{'text': 'Falcon', 'callback_data': 'falcon_model'}],
+            [{'text': 'Dolly', 'callback_data': 'dolly_model'}],
+            [{'text': 'OpenAI', 'callback_data': 'openai_model'}],
+        ]
+    }
+
+    keyboard_json = json.dumps(keyboard)
+
     payload = {
         'chat_id': chat_id,
-        'text': 'Пдф обрано для роботи.......'
+        'text': 'Оберіть модель:',
+        'reply_markup': keyboard_json
     }
 
     return payload, 'SendMessage'

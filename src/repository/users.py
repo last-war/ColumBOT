@@ -31,3 +31,27 @@ async def user_add_use_docs(user_id: int, doc_id: int, db: Session) -> Type[User
     db.commit()
     db.refresh(user)
     return user
+
+
+async def set_user_falcon_model(user_id: int, db: Session) -> Model:
+    user = await get_user_by_user_id(user_id, db)
+    user.model = Model.falcon
+    db.commit()
+    db.refresh(user)
+    return user.model
+
+
+async def set_user_dolly_model(user_id: int, db: Session) -> Model:
+    user = await get_user_by_user_id(user_id, db)
+    user.model = Model.dolly
+    db.commit()
+    db.refresh(user)
+    return user.model
+
+
+async def set_user_openai_model(user_id: int, db: Session) -> Model:
+    user = await get_user_by_user_id(user_id, db)
+    user.model = Model.openai
+    db.commit()
+    db.refresh(user)
+    return user.model
