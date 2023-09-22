@@ -1,8 +1,8 @@
-_HF_API_KEY="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"
-TELEGRAM_TOKEN="1234567890:AAG4A1mrLgy0UFCy6Ycdz8UFOjoD_sPgobk"
-BASE_URL="https://api.telegram.org/bot1234567890:AAG4A1mrLgy0UFCy6Ycdz8UFOjoD_sPgobk"
+_HF_API_KEY=""
+TELEGRAM_TOKEN="1234567890:"
+BASE_URL="https://api.telegram.org/bot1234567890:"
 DB_DIR="data/db"                                   # Директорія для бази даних
 INPUT_FILE_PATH="data/input/sample.pdf"            # Шлях до вхідного PDF-файлу
 OUTPUT_DIR="data/output"                           # Директорія для виводу даних
 
-DATABASE_URL="postgresql+psycopg2://postgres:secret@localhost:5432/columbotdb"
+DATABASE_URL="postgresql+psycopg2://postgres:___@localhost:5432/____botdb"
