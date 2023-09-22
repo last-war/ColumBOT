@@ -2,7 +2,7 @@ from typing import Type
 
 from sqlalchemy.orm import Session
 
-from src.database.models import User
+from src.database.models import User, Model
 from src.schemas.users import UserModel
 
 
@@ -13,6 +13,7 @@ async def get_user_by_user_id(user_id: int, db: Session) -> User | None:
 async def create_user(body: UserModel, db: Session) -> User:
 
     new_user = User(**body.dict())
+    new_user.model = Model.falcon
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

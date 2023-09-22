@@ -12,6 +12,8 @@ class Model(enum.Enum):
     Model the user uses.
     """
     falcon: str = 'falcon'
+    dolly: str = 'dolly'
+    openai: str = 'openai'
 
 
 class User(Base):
@@ -23,7 +25,7 @@ class User(Base):
     username = Column(String(), unique=False, nullable=False)
     created_at = Column('created_at', DateTime, default=func.now())
     updated_at = Column('updated_at', DateTime, default=func.now())
-    model = Column('models', Enum(Model), default=Model.falcon)
+    model = Column('models', Enum(Model), default=None)
     use_docs = ARRAY(Integer, as_tuple=False, dimensions=None, zero_indexes=False)
     docs = relationship("Doc", back_populates="user")
 

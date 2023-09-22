@@ -197,6 +197,15 @@ async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Sessio
     return payload, 'SendMessage'
 
 
+async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
+    payload = {
+        'chat_id': chat_id,
+        'text': 'Пдф обрано для роботи.......'
+    }
+
+    return payload, 'SendMessage'
+
+
 async def helps(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
     #TODO logic help
     payload = {
@@ -209,7 +218,7 @@ async def helps(chat_id: int, message: str, telegram_data: dict, db: Session) ->
 
 MESSAGE_COMMAND = {
     '/start': start,
-    #'/load_pdf': load_pdf,
+    '/choose_model': choose_model,
     '/choose_pdf': choose_pdf,
     #'/send_question': send_question,
     '/helps': helps,
