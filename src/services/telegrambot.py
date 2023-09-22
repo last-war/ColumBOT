@@ -83,12 +83,13 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
     else:
         #TODO отримати перелік доків з бази
         model = "falcon"
-        model = "dolly"
+        #model = "dolly"
         try:
             if model == "falcon":
                 print('falcon')
                 qa = create_falcon_conversation()
-                q_text = qa({'question': telegram_data['text'], })
+                q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
+                print(q_text.keys())
             else:
                 print('dolly')
                 qa = create_dolly_conversation()

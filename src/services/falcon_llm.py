@@ -19,7 +19,7 @@ def create_conversation() -> ConversationalRetrievalChain:
                                          "max_new_tokens": 100})
 
     # Ініціалізація моделі для створення векторних представлень тексту
-    embeddings = HuggingFaceEmbeddings()
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
     # Ініціалізація бази даних для зберігання векторних представлень тексту
     db = Chroma(
