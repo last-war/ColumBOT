@@ -81,12 +81,22 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
         #TODO отримати перелік доків з бази
 
         #TODO обробити питання користувача
+        q_text = telegram_data['text']
         payload = {
-            'chat_id': telegram_data['text'],
-            'text': 'Відповідь на питання по ПДФ.......'
+            'chat_id': telegram_data['sender_id'],
+            'text': f'Відповідь на питання {q_text} по ПДФ.......'
         }
 
-        return payload, 'SendMessage'
+        headers = {'Content-Type': 'application/json'}
+        response = requests.request(
+            'POST', f'{settings.base_url}/SendMessage', json=payload, headers=headers)
+        status_code = response.status_code
+        response = json.loads(response.text)
+
+        if status_code == 200 and response['ok']:
+            return True
+        else:
+            return False
 
 
 def create_command_menu():

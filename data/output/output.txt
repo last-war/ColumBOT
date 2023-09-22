@@ -1,444 +1,204 @@
-HOLISTICA Vol 10 , Issue 2 , 201 9, pp. 115 -128                                      DOI:10. 2478/hjbpa -2019 -0020 
- 
-Cyber Security  
- 
-Rohit, KALAKUNTLA , 
-Information Technology, University of the Cumberlands , USA 
-rkalakuntla2612@ucumberlands.edu  
-Anvesh Babu, VANAMALA , 
-Information Technology, University of the Cumberlands , USA 
-avanamala1554@ucumberlands.edu  
-Ranjith Reddy, KOLIPYAKA , 
-Information Technology, University of the Cumberlands  
-rkolipyaka8395@ucumberlands.edu  
- 
- 
-Abstract  
-Cyber Security accepts a vigorous role in the area of information technology. Safeguarding the 
-information has become an enormous  problem in the current day. The cybersecurity  the main thing 
-that originates in mind is 'cyber crimes' which are aggregate col ossally daily. Different governments 
-and organizations are taking numerous measures to  keep these cyber wrongdoings. Other than 
-different measures cybersecurity  is as yet a significant  worry to many. This paper mostly  emphases  
-on cyber  security and cyber t errorism. The significant  trends of cybersecurity  and the consequence 
-of cybersecurity  discuss in it.  The cyber -terrorism could make associations lose billions of dollars in 
-the region of organizations . The paper also explains  the components of cyber terr orism and 
-motivation of it. Two case studies related to cybersecurity  also provide in this paper. Some solution 
-about cyber  security and cyber terrorism also explain in it.  
- 
-Keywords:  Cybersecurity; cyberspace; cyber terrorism; Information security . 
- 
- 
-1. Introduction  
-Today an individual can receive and send any information may be video, or 
-an email or only through the click of a button but did s/he ever ponder how safe  
-this information transmitted to another individual strongly with no spillage of 
-data ? The proper  response lies in cybersecurity. Today more than  61% of full 
-industry exchanges are done on the internet, so this area prerequisite high  quality 
-of security for direct and best exchanges. Thus, cybersecurity  has become a most 
-recent issue ( Dervo jeda, et. all., 2014) . The extent of cybersecurity does not 
-merely restrict  to verifying the data in IT industry yet also to different fields like 
-cyberspace  and so forth. Improving cybersecurity and ensuring that necessary  
-data systems are vital to each c ountry's security and financial pro sperity.  
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTCHOLISTICA Vol 10 , Issue 2 , 201 9  
-Creating the Internet safer (and safeguarding Internet clients) has become 
-to be  essential  to the improvement of new management  just as a legislative  
-strategy. The encounter against cybercrime needs an extensive and more  secure 
-practice  (Gross, Canetti & Vashdi, 2017) . The  particular estimates alone cannot  
-keep any crime ; it is essential  that law authorization offices are allowable to 
-investigation and  indict cybercrime efficiently. Nowadays numerous countries and 
-administrations are compelling strict rules on cyber safeties to keep the loss of 
-some vital data. Each  should be equipped on this cybersecurity and save 
-themselves fro m these increasing cyber crimes.  
-Cyber -security is both about the insecurity made by and through this new 
-space and about the practices or procedures to make it (progressively) secure 
-(Kumar, & Somani, 2018) . It alludes to a lot of exercises and measures, both 
-specialized and non- specialized, expected to ensure the bioelectrical condition 
-and the information it contains and transports from all possible threats.  This 
-research aims to gather all the information and overview related to cyber- crime 
-and provide the historical facts and perform reports on the analyzed data of different attacks reported everywhere in the last five years. Based on the analyzed informatio n, we would like to provide all the countermeasures that organizations 
-may undertake in order to ensure improved security that would support in defending the organizations from being attacked by the hackers and provide a cyber -security to avoid all risks.  
- 
-2. Purpose  
-      The paper provides information  about cyber  security and cyber 
-terrorism. It covers various information about these topics  in its subsections. 
-Trends of cybersecurity and the role  of social media in cybersecurity define in this 
-paper. The pap er provides some necessary  information about cyber  terrorism. The 
-components of “cyber terrorism” and the consequences  of this terrorism also 
-explain in this paper. There are some examples of case studies those related to 
-cybersecurity. The paper also prov ides some solutions regarding cyber  security 
-and cyber terrorism. It provides some techniques for  preventing cyber terrorism. 
-The future study and scope of cybersecurity  define in it.  
-Cybersecurity has become a major concern over the last 10 year in the IT 
-world. In the present world, everybody is facing a lot of problems with cyber -
-crime. As hackers are hacking major sensitive information from government and some enterprise organizatio ns the individuals are very much worried as cyber-
-security assault can bring about everything from wholesale fraud, to blackmail big companies. They are many varieties of cyber -crimes emerging where everyone 
- 
-116 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTC   HOLISTICA Vol 10 , Issue 2 , 201 9   
- 
-needs to be aware of the scams and they are diff erent measures and tools which 
-can be used for avoiding the cyber -crimes. Every organization wants to secure 
-their confidential data from getting hacked.  Getting hacked is not just about losing 
-the confidential data but losing the relationship with custom ers in the market 
-(Bendovschi, 2015).  
-The Internet is today's fastest growing infrastructure. In today's technical 
-environment many new technologies are changing mankind. But due to these emerging technologies, we are unable to protect our private information in an efficient way, so the cyber -crimes are drastically increasing on daily basis. Majority 
-of the transactions both commercial and personal are done using the means online transaction, so it is important to have an expertise who require a high quality of security maintaining a better transparency to everyone and having safer transactions. So cybersecurity is the latest issue. Advanced technologies like cloud 
-services, mobiles, E -commerce, internet banking and many more they require a 
-high standards and safer process of security. All the t ools and technologies 
-involved for these transactions hold the most sensitive and cruicial user 
-information. So providing the necessary security to them is very important. Improving the cybersecurity and safeguarding the sensitive data and infrastructures are important to every countries top priority security 
-(Panchanatham, 2015) . 
- 
-3. Trends of Cyber Security  
-     Cyber Security assumes a critical role in the area of data technology. 
-Safeguarding the data have become the greatest difficulty in the current day . The 
-cybersecurity the main thing that raids a chord is cybercrimes which are increasing 
-tremendously step by step (Samuel, & Osman, 2014) . Different administrations 
-and organizations are taking many measures to keep these cybercrimes. 
-Additional the diff erent measures cybersecurity is as yet an enormous worry to 
-numerous. Some main trends that are changing cybersecurity give as follows:  
- 
-3.1. Web servers  
-The risk of assaults on web applications to separate information or to 
-circulate malicious code perseveres. Cybercriminals  convey their code using  good  
-web servers they have  traded off. In any case, information taking attacks, a 
-considerable lot of which g et the deliberation of media, are also a significant  risk. 
-Currently, individuals need a more unusual  accentuation on securing web servers 
- 
-117 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTCHOLISTICA Vol 10 , Issue 2 , 201 9  
-as well as web applications ( Bendovschi, 2015) . Web servers are mainly  the pre -
-eminent stage for these cybercriminals  to take the information. Thus, one should 
-reliably utilize an additional secure program, mainly  amid vital exchanges all 
-together not to fall as a quarry  for these defilements.  
- 
-3.2. Mobile Networks  
-The risk of assaults on web applications to separate informat ion or to 
-circulate malicious code perseveres. Cybercriminals  convey their code using  good  
-web servers they have  traded off. In any case, information taking attacks, a 
-considerable lot of which get the deliberation of media, are also a significant  risk. 
-Currently, individuals need a more unusual  accentuation on securing web servers 
-as well as web applications ( Bendovschi, 2015) . Web servers are mainly  the pre -
-eminent stage for these cybercriminals  to take the information. Thus, one should 
-reliably utilize an additional secure program, mainly  amid vital exchanges all 
-together not to fall as a quarry  for these defilements.  
- 3.3. Encryption 
-It is the method toward encoding messages so programmers cannot  
-scrutinize it. In encryption, the message is encoded by encryption , changing it into 
-a stirred -up figure content. It commonly completes with the use of an “encryption 
-key,” that demonstrates how the message is to encode. Encryption at the earliest  
-reference  point level secures information protection and its respectability 
-(Sharma, 2012) . Additional use of encryption obtains more problems in  
-cybersecurity. Encryption is used to ensure the information  in travel, for instance,  
-the information  being exchanged using  systems (for example the Internet, online 
-business), mobile phones, wireless radios and so on.  
- 3.4. ADP’s and targeted attacks  
-Advanced Persistent Threat (APT) is a whole of the dimension  of cybercrime 
-ware. For quite a long time network security capacities. For example, IPS or web 
-filtering have had a key influence in distinguishing such focused -on assaults 
-(Bendovschi, 2015) . As attackers become bolder and utilize increasingly dubious 
-methods, network security must incorporate with other security benefits to 
-identify assaults. Thus, one must recover our security procedures to counteract 
-more dangers coming later on. Subsequently the above is  a portion of the patterns 
- 
-118 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTC   HOLISTICA Vol 10 , Issue 2 , 201 9   
- 
-changing the essence of cybersecurity on the planet. The top network threats are 
-showin g in figure 1 . 
- 
-Figure 1. Threats for Cyber Security  
+Bibliometric Analysis on Identifying Plant, 
+Crop Diseases Using Machine Learning 
+and Deep Learning 
+Ch.V. Raghavendran1, RVVN Bheema Rao2, SK Mahaboob Basha3, T.R. Mani 
+Chigurupati4 
+1,2Aditya College of Engineering and Technology, Surampalem, AP, India 
+3, 4 TKR College of Engineering & Technology, Hyderabad, Hyderabad, Telangana, India 
+*1raghuchv@yahoo.com, 2rvvnbrao@hotmail.com, 3bashashaik1617@gmail.com, 
+4tulasiratnamani.chigurupati@gmail.com 
+Abstract. This paper is intended to explore the research done on identifying the 
+diseased plants and crops using Machine Learning (ML) and Deep Learning (DL) 
+techniques during last 10 years using bibliometric methods. In this study, we used 
+Scopus database to analyze on “Plant disease” or “Crop disease” using “Machine 
+Learning” or “Deep Learning” or “Neural Networks”. This paper focuses on the importance of ML and DL techniques in identifying plant or crop diseases. The database collected from the Scopus is analyzed using VOSviewer software of 
+version 1.6.16. The study is limited to publications from conferences, journals with 
+subject areas are limited to Computer Science, Engineering and languages limited to English and Chinese. Scopus search outputs 824 articles on Plant or Crop diseases 
+with ML, DL and Neural Networks covering conference papers and journal articles. 
+Statistics showed that more articles were published during the last five years and 
+major contributions were from India. By analyzing database on Authors, Subject 
+area, Keywords, Affiliation, Source type it is evident that there is plenty of research 
+scope in this area. Network analysis on diverse parameters specifies that there is a 
+good scope to do research in this topic using advanced deep learning techniques. 
+Keywords. Crop Disease, Plant Disease, Machine Learning, Deep Learning, Neural 
+Networks, Network Analysis, Bibliometric Analysis. 
+1. Introduction 
+Diseases in plant, crop are the major concern in the agricultural sector, and their 
+automatic detection is critical for their monitoring. Plants are extremely susceptible to 
+seasonal illnesses, which worsen over time and under varying climatic conditions. As a result, it is critical to address the issue of safeguarding plants from a variety of illnesses. 
+The leaves reflect the majority of disease symptoms; however leaf identification by 
+professionals in laboratories is costly and time-consuming. Rice infections commonly cause yield losses of 20 to 40% and are closely associated to the global economy [1]. 
+Rice disease diagnosis is still primarily done by hand. It’s vital to identify diseases 
+quickly so that treatment can be planned and losses can be minimized.  
+Many computer algorithms have been developed to detect plant diseases early in 
+order to protect crops from damage. Extracted features are very important in both 
+segmentation and categorization of infected areas in the Machine Learning, Deep Recent Developments in Electronics and Communication Systems
+KVS Ramachandra Murthy et al. (Eds.)© 2023 The authors and IOS Press.This article is published online with Open Access by IOS Press and distributed under the termsof the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/ATDE221245113Learning domains [2,3]. Deep learning approaches have recently expanded their 
+applicability in plant disease identification, providing a comprehensive instrument with 
+extremely accurate findings. Since Convolutional Neural Networks (CNNs) have achieved outstanding results, deep CNN models are used to categorize and analyze 
+diseases in plants from the leaves [4-8]. 
+In this context, this paper presents a thorough assessment of the literature with the 
+goal of determining the current state of the art in the application of ML, DL and CNN in the identification and classification of plant diseases, as well as identifying trends using 
+Scopus database and VOSViewer software. 
+2. Literature study 
+In previous decades, the citation count of a paper was regarded the most essential 
+indicator of its scientific effect, and it was regularly used to evaluate the work of faculty 
+members, research institutions, and universities [9]. Counts are not simply a measure of 
+influence, but they can also be used to scale the overall quality of research [10]. 
+A deep CNN based modified LeNet proposed in [11] to carry experiments on maize 
+leaf images of PlantVillage dataset. This CNN is trained on four classes and achieved an 
+accuracy of 97.89%. In the work [12], the researchers described a test that was done in 
+Sardinia using the DSS LANDS to forecast potato late light illness. The objective of the study was to see if using a Machine Learning technique, regional weather characteristics 
+could be utilized to forecast potato late blight risk in southern Sardinia. The disease 
+severity is forecasted with 96% accuracy using feed forward neural network with 
+parameters provided by ARPAS weather stations.  
+Citrus fruits quality and yield will decrease the “Citrus” disease. An effective 
+segmentation and classification model for citrus plant disease is presented in the research [13]. Back Propagation Neural Network (BPNN) is used to categorize citrus disease 
+using the selected features. The proposed model has been tested on the CDIG data and it outperformed other approaches and achieved superior outcomes on the test images. 
+Identifying earliest symptoms of infections through visual examination or laboratory 
+studies is one of the known strategies for minimizing loss due to plant illnesses. Using an infrared camera and an artificial neural network for image classification, researchers 
+presented a low-cost, portable, and noninvasive plant health monitoring device in [14]. 
+The first prototype was tested on a cassava plant to determine its photosynthetic activity, which is a good indicator of the plant’s current health. 
+For the needed analysis, various analytical models such as Decision Tree, Random 
+Forest, and Bayesian Neural Network are existing in the literature. These methods are applied for examining multidimensional, time-specific data in the agriculture segment in 
+order to provide useful knowledge to help economic growth efforts [15-21].  
+3. Database 
+Data about the research work and publications can be obtained from popular repositories 
+like Scopus, Web of Science, Scimago, Google Scholar etc. Among these Scopus 
+database is the most popular and commonly used repository. Different keywords are used 
+in the search and languages limited to English and Chinese. Another filter is on the year 
+of publication with range May, 2021 to 2012.  Ch.V .Raghavendr anetal./Bibliometric Analysis onIdentifying Plant, CropDiseases 1144. Statistical analysis and results 
+4.1 Documents by year of publication, year by source 
+The documents collected for this analysis are from the years 2012 to May, 2021 from the 
+Scopus database including Conferences, Book chapters, Articles etc. The following 
+graph in Figure 1 shows progressive growth in the selected area.  
+The documents under analysis are collected from different sources viz., Springer Lecture Notes, ACM, IEEE etc. Among the list of sources, Computers and Electronics In 
+Agriculture  stands first with 44 documents and Advances In Intelligent Systems And 
+Computing  with 35 documents. The Figure.2 shows the graph representing year wise 
+count with source of documents for the top five sources.  
  
  
-           
+    Figure. 1  Analysis of Documents by year   Figure. 2  Analysis of Documents by source 
+4.2 Documents by affiliation, Country / Territory 
+In analyzing the documents by the affiliations, it was found that Chinese Academy of 
+Science has 22 documents and Vellore Institute of Technology with 14 documents. 
+According to Scopus database Indian researches have published 325 documents, Chinese 
+researches published 178 documents.  
+4.3 Documents by type, Subject 
+Among documents under study, it is observed that majority of the papers are Conference 
+papers and Journal articles. Out of 824 resultant documents 746 documents are of these two types only. Doughnut chart presenting major documents types is shown in Figure. 3. 
+The Scopus database has resulted 1987 documents for the given query and this study is 
+limited two subjects Computer Science, Engine ering. These two subjects consist of 1160 
+documents in which Computer Science is with 691, Engineering with 469. The pie chart in Figure. 4 presents the details of all the subjects with percentage of documents.  
+5. Network Analysis 
+5.1 Co-authorship analysis  
+In the Network analysis, the Co-authorship analysis is carried on three parameters – 
+Authors, Organizations and Countries.  
+Ch.V . Raghavendran et al. / Bibliometric Analysis on Identifying Plant, Crop Diseases 115  
+Figure. 3 Analysis of Documents by type Figure. 4 Analysis of Documents by subject 
  
+In analyzing the Co-authorship with authors, documents with more than 25 authors 
+are not considered. The min. no. of documents an author is made to two and these selected 
+356 authors from the total 2308 authors. Few of 356 items in the network are not 
+connected to one another and the major set of connected items contains of 144 items 
+only. It is witnessed from the network diagram that, Zhang J. has highest no. of documents equal to 13. The Figure. 5 shows Co-authorship relationship with authors.  
+In the selected documents, the researchers are from 1401 organizations and threshold 
+set for network analysis is minimum number of documents per organization as two. This 
+has resulted 71 documents and out of these only four items are connected in two clusters. 
  
-4. Role of Social Media in Cyber Security  
-Social media has turned into a lifestyle for some individuals. We use it to stay 
-in contact, plan occasions, share our photographs and comment on recent 
-developments. It has replaced email and telephone requires a ton of us. However, similarly as with what ever else on the web, it is imperative to know about the 
-dangers. PCs, cell phones, and different gadgets are priceless assets that furnish people of any age with the extraordinary capacity to connect and collaborate with 
-whatever remains of the world. Ind ividuals can do this in various ways, including 
-the utilization of social media or networking sites.  
-Courtesy of social media, people can share musings, pictures, exercises, or 
-any part of their lives (Gross, Canetti & Vashdi, 2017) . They can bring an unk nown 
-look into the lives of others, regardless of whether they live nearby or over the globe. Unfortunately, these networks additionally represent security toward one's 
-PC, protection, and even their security. Social media collection among faculty is 
-soaring as is the risk of assault (Sharma, 2012) . Since social media sites are nearly 
-utilized by the majority of them reliably, it has become an excellent stage for cybercriminals for hacking private data and taking significant data.  
+The researchers participated in the selected domain are from 87 different countries 
+and we set a threshold of minimum documents of country two. Out of 48 documents, the 
+largest set of connected items consists of 43 items with 15 clusters and 80 links.  
+5.2 Network Analysis of Co-occurrences 
+In this Network analysis, the Co-occurrences analysis is carried on three parameters – all 
+keywords, Author keywords, Index keywords.  
+Keyword plays a vital role in identifying a document. Among the documents under 
+study, there were 4490 keywords. For a threshold of minimum 3 occurrences, 775 
+documents are selected. The keyword Deep Learning  stands first with 668 links with 
+total link strength of 4143. The next keyword is Plant disease  with 672 links and total 
+link strength of 3440. The network with 775 documents is presented in Figure 6.  
+For the co-occurrence with author keywords the threshold is taken as minimum three 
+occurrences of keywords and these resulted 176 documents out of 1600. In these Deep 
+Learning stands first with 121 links and link strength of 572.  
+5.3 Network Analysis of Citations 
+Among 824 documents under study, 366 documents are selected with a threshold of two. In these, the largest set of connected items is 163 with 29 clusters and 307 links. It is 
+observed that, the document titled  Deep Learning models for plant disease detection and 
+diagnosis of Ferentinos K.P.  is having highest number of 64 links and 498 citations.
+  
  
-119 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTCHOLISTICA Vol 10 , Issue 2 , 201 9  
-The organizations need to assure they are likewise as fast in recognizing 
-dangers, reacting increasingly, and keeping away from a rupture of any sort. 
-Subsequently, individuals must take suitable measures particularly in managing social media to keep the loss of their data. The cap acity of persons to impart data 
-to a group of persons of millions is at the core of the exact test that social media offerings to organizations (Cabaj, Kotulski, Księżopolski, & Mazurczyk, 2018) . 
-Nevertheless, enabling anyone to disperse financially delica te data, social media 
-additionally gives a comparable ability to range false data. It can be merely being as harming. The rapid spread of incorrect information by social media is among the growing dangers. Though social media can utilize for cybercrimes, t hese 
-organizations cannot stand to quit utilizing social media as it assumes an essential role in the attention of an organization. In its place, they should have arrangements that will inform them of the risk to fix it before any actual harm is done Dervo jeda, Verzijl, Nagtegaal, Lengton, & Rouwmaat, 2014) . Anyway, 
-organizations should understand this and observe the meaning of breaking down the data chiefly in social deliberations and give good security plans to avoid dangers. One must contract with socia l media by using specific plans and the right 
-technologies.  
- 
-5. Cyber Terrorism  
-The term “terrorism” can allude  to the illegal utilization of power or 
-viciousness against people in order to threaten an administration or its residents 
-and associations which might be to accomplish a political or a malicious  site [10]. 
-Terrorism has transformed from the conventional  structure to the cyber type of 
-innovation supported terrorism recognized  as cyber terrorism. It stays  vital issues 
-of the present society. Not just that the battle against terrorism is falling behind, current cybercrime assaults are ending up progressively forceful and 
-confrontational (Sharma, 2012) . This terrorism is the utilization of cyber word to 
-dispatch an assault to the essential  foundations that the presence of associations 
-and countries entirely  depended after that  can prompt its shut down.  
- 
-5.1. Components of Cyber Terrorism  
-A few attacks as cyber terrorism have  a few parts which have  been 
-distinguished by numerous observational researchers in the exploration network. 
-As indicated by Samuel and Osman (2014) in their hypothetical model recognize the five  sections that a “cyber -terrorism” classified  they are; the objective of the 
-violence, inspiration and dedication towards the mission to be accomplished when such incident takes place,  impact, instruments are utilized to dispatch such assault 
- 
-120 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTC   HOLISTICA Vol 10 , Issue 2 , 201 9   
- 
-and attacking ’s, area which is nature just as the strategy for activity. It can 
-confidently know  by knowing the profile of activities that drive the actions of the 
-culprits (Kumar, & Somani, 2018) .  
-The critical issue in “cyber terrorism” is the motivation to complete such an 
-action on the Internet , that outcomes in savagery/damage to people and their 
-property Dervojeda, Verzijl, Nagtegaal,  Lengton, & Rouwmaat, 2014) . It is by a 
-portion of the segments. The terr orists of the world proceed  the upside of the 
-cyber world with solid incentive as a stage with which they can use to dispatch 
-more unusual  outbreak. Yunos and Ahmad (2014) said that with the utilization of 
-Information and correspondence innovation, a terro rist could  present more 
-noteworthy harms or exact the republic with troublesome conditions because of the interruption of necessary  administrations that the “cyberspace terrorist” 
-causes more damage and devastation by the cyberspace than done the 
-conventio nal strategy for terrorism.  
- 
-5.2. Motivating Factor of Cyber Terrorism  
-The motivating factors of cyber terrorism give  as follows:  
-5.2.1.  Websites’ Supportive Nature:  
-The internet has viewed as a medium that is exceptionally tremendous, and 
-that can in the meantime draw in light of a legitimate concern for some individuals 
-to join some group of interest. The cyberterrorist prefers the utilization of the 
-website as a res ult of its robust nature in that it can refer a message to a great 
-many individuals inside a twinkle of an eye; they consider it to be a stage that is anything but difficult to select absorbed individuals.  
-5.2.2.  Anonymity Nature of the internet:  
-Anonymity is th e pivotal element that each evil culprit leans towards with 
-the goal that their character could not be recognizable after playing out their 
-devilish act.  The Internet is a sheltered domain just as concealing stage for the 
-terrorist as they can stay unknow n so that their personality cannot be known.  
-5.2.3.  Hacking:  
-The overall term of all kinds of unapproved access to any "computer system" 
-network organize is hacking that can occur in any structure all things measured as "cyber murder." A large number of these hac kers make use of a "brute force‟ 
-which is the combinations of every single imaginable letter just as numbers and images till they get the password Sreenu, & Krishna, 2017) . 
- 
-121 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTCHOLISTICA Vol 10 , Issue 2 , 201 9  
-5.2.4.  Computer Viruses:  
-These viruses are here and there scattered on a system to in other to do 
-hurtful exercises. These may be to fill in as an administrative agent, create 
-information or even split down the system.  
-5.2.5.  Password Sniffing:  
-The “Cyber terrorist” may use one of the technique such as password sniff 
-as procedures to complete their “cyber -attack” on different countries and many 
-big organizations to see their downfall and have control over their systems. The password sniffer is programming which uses to screen organize and in the meantime catch all the password that passes the s ystem connector.  
- 
-5.3. Consequences of “Cyber Terrorism”  
-Cyber terrorism is an original type of cyber danger and attack that has many 
-outcomes connected to it when propelled against any countries and associations. Some consequences of cyber terrorism define as follows:  
-5.3.1.  Data Intrusion:  
-The cyber terrorism can annihilate information honesty with the goal that 
-the information could never again be trusted, pulverizing its classification as 
-intruding on its accessibility. The expanding rate of this cyber terrorism i n 
-encroaching associations and country's information has produced a ton of 
-difficulties which has come about in loss of vitals and critical information that is typically difficult to recover (Sutton, 2017) . 
-5.3.2.  The attack on Businesses:   
-The cyber -terrorism could make associations lose billions of dollars in the 
-region of organizations. The data arrangement of a bank can be attacked or hack through the terrorists who will prompt unapproved access to such financial balance and make them los e gigantic millions of dollars which can create such 
-bank to keep running into bankruptcy (Gade, & Reddy, 2014).  
-5.3.3.  Loss of Life:  
-Cyber terrorism has guaranteed many acquitted lives and in the meantime 
-render numerous homes to a condition of the problem that  is occasionally coming 
-about to mental injury to the influenced families. The “cyber -terrorism” can in one 
-method or alternate prompts the death toll just as causing severe harms. It has 
-shown in an attack on the PCs utilization, networks’ as well as attacks that have 
- 
-122 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTC   HOLISTICA Vol 10 , Issue 2 , 201 9   
- 
-come about to the different types of blasts of a few plane accidents issues 
-everywhere throughout the world which that has asserted numerous life (Cabaj, Kotulski, Księżopolski,  & Mazurczyk, 2018) . 
-5.3.4.  Consumer Trust in Doubt:  
-The development of  any organizations and its support relies upon the trust 
-that its purchaser has on such association as trust can see tools that fortify association and certainty among associations and clients.  
- 
-6. Case Study Examples  
-6.1. Cyber Security in E -Governance case study  
-E-Governance is the extension of the efforts completed through the 
-governments to recover relations with their nationals. With its instilled 
-straightforwardness and receptiveness, given the standards of the Internet, E -
-Governance conveys governments all the more near their residents. Existing and potential dangers in the circle of cybersecurity are among the most genuine difficulties of the 21st century. To ensure E -Governance extends there is a 
-requirement for data security best practices (Hua, & Bap na, 2013) . Security 
-policies, practices, and techniques must be set up just as the use of security technology. It helps to ensure e -Government systems against attack, recognizes 
-great exercises administrations and to have a demonstrated alternate course of  
-action set up. An open private organization is a vital part of cybersecurity in E -
-Governance. These associations can conveniently go up against coordination issues. Powerful cyber -crime prevention and arraignment activities in all the ICT 
-appropriate conditions.  
- 
-6.2. Kaspersky Kidnapping Case  
-The “highest- profile” cyber surveillance, stalking, and kidnapping case 
-included Ivan Kaspersky, child of the administrator and CEO of Russia -based 
-Kaspersky Lab, a standout amongst the most unmistakable cybersecurity fir ms on 
-the planet. Ivan Kaspersky was abducted for payoff in 2011 while strolling to work from his Moscow loft. As indicated by Russian media sources, beginners –  a more 
-seasoned obligated couple –  organized the plot and enrolled their child and two 
-of his companions as "muscle" for the plot (Cabaj, Kotulski, Księżopolski,  & 
-Mazurczyk, 2018) . The abductors stalked Kaspersky and his sweetheart for a while 
-preceding the seizing, deciding his conduct standards and finding that he did not 
- 
-123 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTCHOLISTICA Vol 10 , Issue 2 , 201 9  
-have a protective secu rity detail. The hijackers supposedly acquired all the 
-required data from Kaspersky's client profile on Vkontakte, a famous Russian 
-social systems administration site. Kaspersky was compelled to call his dad to transfer the payoff requests (Gade, & Reddy, 2014) . The abductors may have 
-utilized similar wireless to make food deliveries or had geolocation administrations empowered.  
- 
-6.3. Uber Case study  
-Data breaches happen every day, in too many places, but the risk of data 
-breach doesn't necessarily depend on the  number, it may also depend on the risk 
-and damage it causes the company's revenue and impact on the users or account holders, one of the biggest recent data breaches is Uber.  
-6.3.1.  Impact:  
-One of the recent major cyber -attack is data breach of personal information 
-of around 57million Uber users and 600,000 Uber drivers got revealed.  
- 
-6.3.2.  Details:  
-The worst part of this attack is how the Uber handled the issue, this is a 
-lesson to most companies what not to do. In late 2016 just two hackers were able 
-to steel the Users personal data with includes names, phone numbers and email 
-addresses.  They were able to steal the 600,000 driver's license information. 
-Hackers got access to the Uber's GitHub account through a third- party cloud-
-based service. With the details found from the GitHub, Hackers found a way to access Uber user data in AWS. Ubers paid those  two hackers $100, 000 to 
-permanently destroy the whole data they obtained and not letting the users or the regulators about stolen information.  
-But also, Uber confirmed that data was destroyed with the assurance they 
-received from the hackers. According to US Law enforcement, any breach should be reported to the authorities and not pay hackers. And this kind of approach from Uber led other hackers to blackmail Netflix, where Hackers frightened to release TV shows unless the company paid the money hackers requested. Almost 49 states 
-have this law enforcement where a security breach should be notified, after the court hearings Uber agreed to pay 20million to settle FTC charges. Not only the US 
-but also other major countries like UK, Italy, and the Philippine s reacted on this 
- 
-124 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTC   HOLISTICA Vol 10 , Issue 2 , 201 9   
- 
-issue. Uber's breach is different from the regular breaches, the company tried to 
-cover up the breach and not alert the authorities and the users.  
-6.3.3.  Uber's plan after the breach:  
-Khrosrowshabi the new CEO of Uber received few disputed problems only 
-with respect to its legal issue also criticism for sexual harassment, underpaying the drivers and few more.  
- 
-6.3.4.  Solutions  
-Some solutions regarding cyber security and cyber terrorism describe here:  
-• Cyber Security Techniques  
-Some techniques can use to improve cybersecurity.                                                                  
-• Access control and “password security”:  The idea of password and user 
-name has a primary method for ensuring data. It may be the principal 
-measures concerning cybersecurity.  
-• Data’s Authentication:  The documents that we get should dependably be 
-validated be before transferring. It should check if it has begun from a critical and dependable source and that they are not modified (Gade, & Reddy, 2 014) . Verifying of these records is typically done by the “anti -
-virus” software present in the gadgets. Subsequently, a decent “anti -
-virus” software is likewise necessary to shield the gadgets from viruses.  
-• Anti-virus software: It is a PC program that clas sifies, avoids, and makes a 
-move to harm or evacuate noxious software programs, for instance, viruses as well as worms. Most "antivirus programs" comprise an "auto -
-update" feature that authorizes the program to download profiles of new viruses with the obj ective that it can chequer for the new viruses when 
-they find.  
-• Malware scanners: This is software that typically filters each of the 
-records and archives current in the framework for vindictive code or destructive viruses [10]. Viruses, worms, as well as T rojan horses, are 
-instances of “malicious software” that regularly assemble and alluded to 
-as malware.  
-• Firewall: A “software program” or an equipment that helps monitor 
-hackers, infections, and all types of worms which endeavour to achieve 
-PC over the Inte rnet. All data which is transmitting to and fro over the 
-web go through the firewall contemporary, which looks at every 
- 
-125 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTCHOLISTICA Vol 10 , Issue 2 , 201 9  
-individual message and hinders which do not meet the security 
-requirements and classify them as threat and try to block from the system 
-and monitor the activities. Henceforth firewalls assume an essential job in recognizing the malware.  
-6.4. Prevention of Cyber Terrorism  
-The capacity to prevent cyber terrorism lies with the capacity to securely 
-verify cyberspace. Cybersecurity has an intriguing parallel to terrorism. Both are 
-lopsided. Guaranteeing the security of information, data, and correspondence is impressively harde r than hacking into a framework. The attacker has an 
-inalienable preferred standpoint in both regular terrorism and cyber -attacks. On 
-account of state -supported attacks, the difficulties are of a lot higher greatness 
-(Cabaj, Kotulski, Księżopolski, & Mazur czyk, 2018) . Governments should guarantee 
-that their rules smear to cybercrimes and be wholly actualized and hold fast to; it is essential that the countries of the biosphere take measures to guarantee that its punitive and technical law is satisfactory to  address the difficulties presented 
-by cybercrimes (Kumar, & Somani, 2018) .  
-The availability, confidentiality and the integrity of information in any 
-associations are essential which endeavors must be set up to guarantee that they are exceptionally secure  because it is the significant cyber resource that makes 
-each association stand and in the meantime depended upon. The information has entered by the “cyber -terrorist” is something beyond records which may 
-incorporate messages, web applications, web pages,  and just as some 
-indispensable operating systems. (Kumar, & Somani, 2018)  
- 
-7. Future Study and Scope  
-      This paper will help to advance the scientific interests in the exploration 
-of cybersecurity, particularly to respond to the procedural questions of the 
-prediction of future data and actions significant to security patterns. This study sets the backgroun d to begin executing rules for all intentions as indicated through 
-the usual security issues and answers for data systems. This paper consolidates many procedures connected and may be improved to serve cybersecurity regarding anticipating the operational l egitimacy of the methodologies of 
-assessment benchmarks. Finally, the emphasis on limiting, recouping, and disposing of weakness is the primary, basic patterns, and reactions to the constant expanding progress (Panchanatham, 2015) . 
- 
-126 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTC   HOLISTICA Vol 10 , Issue 2 , 201 9   
- 
-      Over the next five years, cyber -crime may create severe damage in 
-information technology. According to the researchers they have estimated an 
-approximate close to 6 trillion dollars loss. So, there would be a very bright scope for people who work and resolve the issues related to cyber -crime and provide all 
-the necessary security measures. Big organizations like CISCO which is completely related to networking technology which is one of the top organization has approximately millions of openings relate d to cybersecurity because which is the 
-future for the safety of Information technology. They are also wide opportunities in government -related fields and also defence field to save the countries secure 
-data from cyber attackers.  
- 
-8. Conclusion  
-      Cyber -security is both about the insecurity made by and through this new 
-space and about the practices or procedures to make it (progressively) secure. 
-Exertion to verify the cyberspace should give a definitive need else the "information technology" will not be vi ably used by clients. The terrorist of things 
-to come will win the wars without discharging a shot just by crushing the country's necessary substructure if steps are not taken to handle the pervasiveness of the expansion in such a cyber -attack. They can br ing an unknown look into the lives of 
-others, regardless of whether they live nearby or over the globe.  
-      The “cyber -terrorism” can in one method or alternate prompts the death 
-toll just as causing severe harms. Though social media can utilize for cyb ercrimes, 
-these organizations cannot stand to quit utilizing social media as it assumes an essential role in the attention of an organization. Cyber terrorism has guaranteed numerous innocent lives and in the meantime render numerous homes to a condition o f the problem that is occasionally coming about to mental injury to the 
-influenced families. Cyber terrorism stays vital issues of the present society. Not 
-just that the battle against Cyber terrorism is falling behind, current cybercrime 
-assaults are ending up progressively forceful and confrontational. Cybersecurity has an intriguing parallel to terrorism. Guaranteeing the security of information, data, and correspondence is impressively harder than hacking into a system.  
- 
-9. References  
-[1] Bendovs chi, A. (2015). Cyber -Attacks – Trends, Patterns and Security Countermeasures. 
-Procedia Economics and Finance, 24- 31. doi:10.1016/S2212- 5671(15)01077 - 
-[2] Cabaj, K., Kotulski, Z., Księżopolski, B., &  Mazurczyk, W. (2018). Cybersecurity: trends, 
-issues, and challenges. EURASIP Journal on Information Security . doi:10.1186/s13635-
-018- 0080 -0 
- 
-127 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTCHOLISTICA Vol 10 , Issue 2 , 201 9  
-[3] Dervojeda, K., Verzijl, D., Nagtegaal, F., Lengton, M., & Rouwmaat, E. (2014). Innovative 
-Business Models: Supply c hain finance. Netherlands: Business Innovation Observatory ; 
-European Union.  
-[4] Gade, N. R., & Reddy, U. G. (2014). A Study Of Cyber Security Challenges And Its Emerging 
-Trends On Latest Technologies. Retrieved from 
-https://www.researchgate.net/publication/260126665_A_Study_Of_Cyber_Security_Challenges_And_Its_Emerging_Trends_On_Latest_Technologies  
-[5] Gross, M. L., Canetti, D., & Vashdi, D. R. (2017). Cyberterrorism: its effects on 
-psychological well -being, public confidence and political attitudes. Journal of 
-Cybersecurity, 3(1), 49 –58. doi:10.1093/cybsec/tyw018  
-[6] Hua, J., & Bapna, S. (2013). The economic impact of cyber terrorism. The Journal of 
-Strategic Information Systems , 22(2), pp. 175- 186.  
-[7] Kumar, S., & Somani, V. (2018). Social Media Security Risks, Cyber Thr eats And Risks 
-Prevention And Mitigation Techniques. International Journal of Advance Research in 
-Computer Science and Management , 4(4),  pp. 125- 129.  
-[8] Panchanatham, D. N. (2015). A case study on Cyber Security in E -Governance. 
-International Research Journal  of Engineering and Technology . 
-[9] Samuel, K. O., & Osman, W. R. (2014). Cyber Terrorism Attack of The Contemporary Information Technology Age: Issues, Consequences and Panacea. International Journal of 
-Computer Science and Mobile Computing, 3(5), pp. 1082- 1090. 
-[10] Sharma, R. (2012). Study of Latest Emerging Trends on Cyber Security and its challenges 
-to Society. International Journal of Scientific & Engineering Research, 3(6).  
-[11] Sreenu, M., & Krishna, D. V. (2017). A General Study on Cyber -Attacks on Social Networ ks. 
-IOSR Journal of Computer Engineering (IOSR -JCE), 19(5), pp. 01-04. 
-[12] Sutton, D. (2017). Cyber Security : A Practitioner’s Guide. Swindon, UK : BCS, the Chartered 
-Institute for IT.  
- 
-128 
-Unauthentifiziert   | Heruntergeladen  01.09.19 21:18   UTC
+Ch.V . Raghavendran et al. / Bibliometric Analysis on Identifying Plant, Crop Diseases 116 
+ Figure. 5 Authors Network Analysis  Figure. 6 All Keywords Network Analysis  
+6. Conclusion 
+This study is on the role of Machine Learning, Deep Learning and Neural Networks in 
+the field of identifying diseases in plants and Crop. This study is carried by using the 
+popular Scopus database. Statistical analysis on the database is made by using Scopus 
+and Network analysis is by using VOSViewer software. A total of 824 documents are 
+selected by Scopus for the years from 2012 to 2021.  
+During this analysis different parameters are considered for comparison. From the 
+year wise number of publications it is very clear that much research is going in this field. Considering documents from an organization, Chinese Academy of Sciences is on top with 22 documents. In the 824 selected documents, major contributions are from India 
+viz., 325 followed by China with 178. Major no. of articles are published in the 
+Conference proceedings and then in Journals and this contributed about 90% of total articles. Scopus database search has resulted 1987 documents for the given query and in 
+this 691 documents are from Computer Science field contributing 34.8%.  
+Network analysis is done using VOSViewer software. Using this software, analysis 
+is done on co-authorship in combination with Authors, Organizations and Countries. Then Co-occurrences are analyzed with All keywords, Author keywords and Index 
+keywords. During Citation analysis; documents, sources, authors, country, and organization are considered. Bibliographic coupling analysis included documents and 
+authors as unit of analysis. From this analysis it is concluded that major research is 
+happening in the field of plant, crop disease using Machine learning and Deep learning using neural networks.  
+References 
+[1] Yibin Wang, Haifeng Wang, Zhaohua Peng, Rice diseases detection and classification using attention based neural network and bayesian optimization, Expert Systems with Applications, Volume 178, 2021, 114770, ISSN 0957-4174, https://doi.org/10.1016/j.eswa.2021.114770. 
+[2] Kianat, Jaweria & Khan, Muhammad & Sharif, Muhammad & Akram, Tallha & Rehman, Amjad & Saba, 
+Tanzila. (2021). A Joint Framework of Feature Reduction and Robust Feature Selection for Cucumber 
+Leaf Diseases Recognition. Optik. 240. 166566. 10.1016/j.ijleo.2021.166566. 
+[3] Nguyen, Ty & Paik, Incheon. (2020). Feature Extraction with Triplet Loss to Classify Disease on Leaf 
+Data. 1-5. 10.1109/iCAST51195.2020.9319494. 
+[4] André Abade, Paulo Afonso Ferreira, Flavio de Barros Vidal, Plant diseases recognition on images using 
+convolutional neural networks: A systematic review, Computers and Electronics in Agriculture, Volume 
+185, 2021, 106125, ISSN 0168-1699, https://doi.org/10.1016/j.compag.2021.106125. 
+Ch.V . Raghavendran et al. / Bibliometric Analysis on Identifying Plant, Crop Diseases 117[5] Puangsuwan, Thararat & Surinta, Olarik. (2021). Enhancement of Plant Leaf Disease Classification 
+Based on Snapshot Ensemble Convolutional Neural Network. ICIC Express Letters. 15. 669-680. 
+10.24507/icicel.15.06.669. 
+[6] Ghiani L, Sassu A, Palumbo F, Mercenaro L, Gambella F. In-Field Automatic Detection of Grape 
+Bunches under a Totally Uncontrolled Environment. Sensors. 2021; 21(11):3908. 
+https://doi.org/10.3390/s21113908 
+[7] Jadhav, S.B., Udupi, V.R. & Patil, S.B. Identification of plant diseases using convolutional neural 
+networks. Int. j. inf. tecnol. (2020). https://doi.org/10.1007/s41870-020-00437-5 
+[8] K. Li et al., “Classification of different degrees of ginkgo leaf disease based on deep learning,” 2019 6th International Conference on Systems and Informatics (ICSAI), 2019, pp. 1228-1232, doi: 10.1109/ICSAI48974.2019.9010110. 
+[9] Safer, M. A., & Tang, R. (2009). The psychology of referencing in psychology journal articles. 
+Perspectives on Psychological Science, 4(1), 51–53. 
+[10] Anderson, M. H. (2006). How can we know what we think until we see what we said?: A citation and 
+citation context analysis of Karl Weick’s the social psychology of organizing. Organization Studies, 
+27(11), 1675–1692. 
+[11] Ahila Priyadharshini, R., Arivazhagan, S., Arun, M. et al. Maize leaf disease classification using deep 
+convolutional neural networks. Neural Comput & Applic 31, 8887–8895 (2019). 
+https://doi.org/10.1007/s00521-019-04228-3 
+[12] Fenu, Gianni & Malloci, Francesca. (2019). An Application of Machine Learning Technique in 
+Forecasting Crop Disease. 76-82. 10.1145/3372454.3372474. 
+[13] C. Senthilkumar and M. Kamarasan, “Optimal Segmentation with Back-Propagation Neural Network 
+(BPNN) Based Citrus Leaf Disease Diagnosis,” 2019 International Conference on Smart Systems and 
+Inventive Technology (ICSSIT), 2019, pp. 78-82, doi: 10.1109/ICSSIT46314.2019.8987749. 
+[14] Panganiban, Edward. (2019). Cassava leaf NDVI - Artificial Neural Network (CaNDVI-ANN): A Low 
+Cost, Portable and Non-Invasive Cassava Plant Health Monitoring Device. International Journal of Advanced Trends in Computer Science and Engineering. 8. 3555-3559. 
+10.30534/ijatcse/2019/136862019. 
+[15] S. V. Militante, B. D. Gerardo and N. V. Dionisio, “Plant Leaf Detection and Disease Recognition using 
+Deep Learning,” 2019 IEEE Eurasia Conference on IOT, Communication and Engineering (ECICE), 
+2019, pp. 579-582, doi: 10.1109/ECICE47484.2019.8942686. 
+[16] Nitin N. Patil, Mohmmad Ali M. Saiyyad, Machine Learning Technique for Crop Recommendation in 
+Agriculture Sector, 2019 International Journal of Engineering and Advanced Technology (IJEAT), ISSN: 
+2249 – 8958, Volume-9 Issue-1, pp. 1359-1363.  
+[17] A. Akhtar, A. Khanum, S. A. Khan and A. Shaukat, “Automated Plant Disease Analysis (APDA): 
+Performance Comparison of Machine Learning Techniques,” 2013 11th International Conference on 
+Frontiers of Information Technology, 2013, pp. 60-65, doi: 10.1109/FIT.2013.19. 
+[18] Yu-Hui F. Yeh, Wei-Chang Chung, Jui-Yu Liao, Chia-Lin Chung, Yan-Fu Kuo, Ta-Te Lin, A 
+Comparison of Machine Learning Methods on Hyperspectral Plant Disease Assessments, IFAC 
+Proceedings Volumes, Volume 46, Issue 4, 2013, Pages 361-365, ISSN 1474-6670, ISBN 
+9783902823304, https://doi.org/10.3182/20130327-3-JP-3017.00081. 
+[19] Wei, Yong & Chang, RuoKui & Wang, Yuanhong & Liu, Hua & Du, Yanhong & Xu, Jianfeng & Yang, 
+Ling. (2011). A Study of Image Processing on Identifying Cucumber Disease. IFIP Advances in 
+Information and Communication Technology. 370. 201-209. 10.1007/978-3-642-27275-2_22. 
+[20] Amara, Jihen & Bouaziz, Bassem & Algergawy, Alsayed. (2017). A Deep Learning-based Approach for 
+Banana Leaf Diseases Classification. 79-88. 
+[21] J. P. Shah, H. B. Prajapati and V. K. Dabhi, “A survey on detection and classification of rice plant 
+diseases,” 2016 IEEE International Conference on Current Trends in Advanced Computing (ICCTAC), 
+2016, pp. 1-8, doi: 10.1109/ICCTAC.2016.7567333. 
+ Ch.V .Raghavendr anetal./Bibliometric Analysis onIdentifying Plant, CropDiseases 118
