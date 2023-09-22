@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from src.conf.config import settings
 from src.database.db import get_db
 from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
-    set_user_openai_model
+    set_user_openai_model, get_user_model
 from src.schemas.users import UserModel
 from src.services.create_index import create_index
 from src.services.falcon_llm import create_conversation as create_falcon_conversation
@@ -82,6 +82,7 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
         if status_code == 200 and response['ok']:
             return True
 
+# User change model
     if telegram_data['is_data']:
         model_ = 'Помилка. Модель не обрано...'
         if telegram_data['data'] in 'falcon_model':
@@ -108,17 +109,20 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
 
     else:
         #TODO отримати перелік доків з бази
-        model = "falcon"
-        model = "dolly"
+
+        # Activate model user
+        model = await get_user_model(telegram_data['sender_id'], db)
         try:
             if model == "falcon":
                 print('falcon')
                 qa = create_falcon_conversation()
                 q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
-            else:
+            elif model == "dolly":
                 print('dolly')
                 qa = create_dolly_conversation()
                 q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
+            elif model == "openai":
+                pass
 
         except Exception as e:
             print('exception')
@@ -225,6 +229,7 @@ async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Sessio
 
 
 async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
+    user_model = await get_user_model(chat_id, db)
     keyboard = {
         'inline_keyboard': [
             [{'text': 'Falcon', 'callback_data': 'falcon_model'}],
@@ -237,7 +242,7 @@ async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Sess
 
     payload = {
         'chat_id': chat_id,
-        'text': 'Оберіть модель:',
+        'text': f'Зараз активна модель: {user_model}. Для того щоб змінити оберіть модель нижче:',
         'reply_markup': keyboard_json
     }
 

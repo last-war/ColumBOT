@@ -55,3 +55,9 @@ async def set_user_openai_model(user_id: int, db: Session) -> Model:
     db.commit()
     db.refresh(user)
     return user.model
+
+
+async def get_user_model(user_id: int, db: Session) -> str:
+    user = await get_user_by_user_id(user_id, db)
+    model_name = user.model.name
+    return model_name
