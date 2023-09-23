@@ -9,7 +9,8 @@ from sqlalchemy.orm import Session
 
 from src.conf.config import settings
 from src.database.db import get_db
-from src.repository.users import get_user_by_user_id, create_user
+from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
+    set_user_openai_model, get_user_model
 from src.schemas.users import UserModel
 from src.services.create_index import create_index
 from src.services.falcon_llm import create_conversation as create_falcon_conversation
@@ -80,19 +81,48 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
 
         if status_code == 200 and response['ok']:
             return True
+
+# User change model
+    if telegram_data['is_data']:
+        model_ = 'Помилка. Модель не обрано...'
+        if telegram_data['data'] in 'falcon_model':
+            model_ = await set_user_falcon_model(telegram_data['sender_id'], db)
+        elif telegram_data['data'] in 'dolly_model':
+            model_ = await set_user_dolly_model(telegram_data['sender_id'], db)
+        elif telegram_data['data'] in 'openai_model':
+            model_ = await set_user_openai_model(telegram_data['sender_id'], db)
+
+        payload = {
+                'chat_id': telegram_data['sender_id'],
+                'text': f'Ви обрали модель: {str(model_.name)}.'
+            }
+
+        headers = {'Content-Type': 'application/json'}
+
+        response = requests.request(
+            'POST', f'{settings.base_url}/SendMessage', json=payload, headers=headers)
+        status_code = response.status_code
+        response = json.loads(response.text)
+
+        if status_code == 200 and response['ok']:
+            return True
+
     else:
         #TODO отримати перелік доків з бази
-        model = "falcon"
-        model = "dolly"
+
+        # Activate model user
+        model = await get_user_model(telegram_data['sender_id'], db)
         try:
             if model == "falcon":
                 print('falcon')
                 qa = create_falcon_conversation()
                 q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
-            else:
+            elif model == "dolly":
                 print('dolly')
                 qa = create_dolly_conversation()
                 q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
+            elif model == "openai":
+                pass
 
         except Exception as e:
             print('exception')
@@ -118,6 +148,7 @@ def create_command_menu():
     headers = {'Content-Type': 'application/json'}
 
     commands = [
+        {"command": "/choose_model", "description": "Обрати модель"},
         {"command": "/choose_pdf", "description": "Обрати ПДФ"},
         {"command": "/helps", "description": "Допомога"}
     ]
@@ -197,6 +228,27 @@ async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Sessio
     return payload, 'SendMessage'
 
 
+async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
+    user_model = await get_user_model(chat_id, db)
+    keyboard = {
+        'inline_keyboard': [
+            [{'text': 'Falcon', 'callback_data': 'falcon_model'}],
+            [{'text': 'Dolly', 'callback_data': 'dolly_model'}],
+            [{'text': 'OpenAI', 'callback_data': 'openai_model'}],
+        ]
+    }
+
+    keyboard_json = json.dumps(keyboard)
+
+    payload = {
+        'chat_id': chat_id,
+        'text': f'Зараз активна модель: {user_model}. Для того щоб змінити оберіть модель нижче:',
+        'reply_markup': keyboard_json
+    }
+
+    return payload, 'SendMessage'
+
+
 async def helps(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
     #TODO logic help
     payload = {
@@ -209,7 +261,7 @@ async def helps(chat_id: int, message: str, telegram_data: dict, db: Session) ->
 
 MESSAGE_COMMAND = {
     '/start': start,
-    #'/load_pdf': load_pdf,
+    '/choose_model': choose_model,
     '/choose_pdf': choose_pdf,
     #'/send_question': send_question,
     '/helps': helps,
