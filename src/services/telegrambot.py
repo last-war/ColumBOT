@@ -11,6 +11,7 @@ from src.conf.config import settings
 from src.database.db import get_db
 from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
     set_user_openai_model, get_user_model
+from src.repository.doc import get_user_documents
 from src.schemas.users import UserModel
 from src.services.create_index import create_index
 from src.services.falcon_llm import create_conversation as create_falcon_conversation
@@ -54,7 +55,7 @@ async def set_webhook(url: str, secret_token: str = '') -> bool:
 
 async def bot_logic(telegram_data: dict, db: Session) -> bool:
     if 'application/pdf' in telegram_data['mime_type']:
-        payload = await load_pdf(telegram_data['sender_id'], telegram_data, db)
+        payload = await load_pdf(telegram_data, db)
 
         headers = {'Content-Type': 'application/json'}
         response = requests.request(
@@ -69,8 +70,7 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
 
     if telegram_data['text'] in MESSAGE_COMMAND.keys():
 
-        response = await MESSAGE_COMMAND.get(telegram_data['text'])(telegram_data['sender_id'], telegram_data['text'],
-                                                                    telegram_data, db)
+        response = await MESSAGE_COMMAND.get(telegram_data['text'])(telegram_data, db)
 
         headers = {'Content-Type': 'application/json'}
 
@@ -108,7 +108,6 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
             return True
 
     else:
-        #TODO отримати перелік доків з бази
 
         # Activate model user
         model = await get_user_model(telegram_data['sender_id'], db)
@@ -166,13 +165,13 @@ def create_command_menu():
         return False
 
 
-async def start(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
+async def start(telegram_data: dict, db: Session) -> tuple:
     payload = {
-        'chat_id': chat_id,
+        'chat_id': telegram_data['sender_id'],
         'text': 'Привіт друже, це АІ бот який допоможе тобі знайти відповідь на питання. Просто завантаж ПДФ.'
     }
     print('telegram data ----> \n' + str(telegram_data))
-    user = await get_user_by_user_id(chat_id, db)
+    user = await get_user_by_user_id(telegram_data['sender_id'], db)
     if user:
         return payload, 'SendMessage'
     elif not user:
@@ -185,7 +184,7 @@ async def start(chat_id: int, message: str, telegram_data: dict, db: Session) ->
         return payload, 'SendMessage'
 
 
-async def load_pdf(chat_id: int, telegram_data: dict, db: Session) -> tuple:
+async def load_pdf(telegram_data: dict, db: Session) -> tuple:
     url = f'https://api.telegram.org/bot{settings.telegram_token}/getFile'
     querystring = {'file_id': telegram_data['file_id']}
     response = requests.request('GET', url, params=querystring)
@@ -219,17 +218,28 @@ async def load_pdf(chat_id: int, telegram_data: dict, db: Session) -> tuple:
     return payload, 'SendMessage'
 
 
-async def choose_pdf(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
+async def choose_pdf(telegram_data: dict, db: Session) -> tuple:
+    user_documents = await get_user_documents(telegram_data['sender_id'], db)
+    # Підготовка відповіді для користувача
+    print(user_documents)
+    if user_documents:
+        # Якщо є документи, то відправляємо їх користувачеві
+        documents_text = "\n".join(user_documents)
+        response_text = f"Ваші документи:\n{documents_text}"
+    else:
+        # Якщо документів немає, повідомляємо користувачеві про це
+        response_text = "У вас немає збережених документів."
+    # Підготовка відповіді для відправки користувачеві
     payload = {
-        'chat_id': chat_id,
-        'text': 'Пдф обрано для роботи.......'
+        'chat_id': telegram_data['sender_id'],
+        'text': response_text
     }
 
     return payload, 'SendMessage'
 
 
-async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
-    user_model = await get_user_model(chat_id, db)
+async def choose_model(telegram_data: dict, db: Session) -> tuple:
+    user_model = await get_user_model(telegram_data['sender_id'], db)
     keyboard = {
         'inline_keyboard': [
             [{'text': 'Falcon', 'callback_data': 'falcon_model'}],
@@ -241,7 +251,7 @@ async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Sess
     keyboard_json = json.dumps(keyboard)
 
     payload = {
-        'chat_id': chat_id,
+        'chat_id': telegram_data['sender_id'],
         'text': f'Зараз активна модель: {user_model}. Для того щоб змінити оберіть модель нижче:',
         'reply_markup': keyboard_json
     }
@@ -249,9 +259,9 @@ async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Sess
     return payload, 'SendMessage'
 
 
-async def helps(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
+async def helps(telegram_data: dict, db: Session) -> tuple:
     payload = {
-        'chat_id': chat_id,
+        'chat_id': telegram_data['sender_id'],
         'text': 'Для початку необхідно відправити пдф файл. Після чого можна задавати питання по його змістом. Просто!'
     }
 
@@ -262,6 +272,5 @@ MESSAGE_COMMAND = {
     '/start': start,
     '/choose_model': choose_model,
     '/choose_pdf': choose_pdf,
-    #'/send_question': send_question,
     '/helps': helps,
 }
