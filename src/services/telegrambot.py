@@ -250,10 +250,9 @@ async def choose_model(chat_id: int, message: str, telegram_data: dict, db: Sess
 
 
 async def helps(chat_id: int, message: str, telegram_data: dict, db: Session) -> tuple:
-    #TODO logic help
     payload = {
         'chat_id': chat_id,
-        'text': 'Коротка довідка по застосунку'
+        'text': 'Для початку необхідно відправити пдф файл. Після чого можна задавати питання по його змістом. Просто!'
     }
 
     return payload, 'SendMessage'
