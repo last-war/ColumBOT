@@ -2,7 +2,7 @@ import os
 import json
 import tempfile
 import uuid
-from langchain.memory import PostgresChatMessageHistory
+
 import requests
 from fastapi import Depends
 from sqlalchemy.orm import Session
