@@ -3,6 +3,10 @@ from src.repository.users import get_user_by_user_id
 from src.database.models import Query
 
 
+async def get_all_queries(db: Session) -> list:
+    return db.query(Query).all()
+
+
 async def get_user_queries(chat_id: int, db: Session) -> list:
     return db.query(Query).filter_by(user_id=chat_id).all()
 

@@ -29,6 +29,15 @@ def process_telegram_data(data: dict) -> dict:
             mime_type = message['document']['mime_type']
             is_document = True
             is_unknown = False
+            if 'caption' in message.keys():
+                if 'diagram' in message['caption']:
+                    is_document = False
+                    is_unknown = False
+                    is_text = False
+                    text = ''
+                    file_id = ''
+                    mime_type = ''
+
         if 'from' in message.keys():
             is_bot = message['from']['is_bot']
             first_name = message['from']['first_name']
