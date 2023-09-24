@@ -253,19 +253,28 @@ async def load_pdf(telegram_data: dict, db: Session) -> tuple:
 
 async def choose_pdf(telegram_data: dict, db: Session) -> tuple:
     user_documents = await get_user_documents(telegram_data['sender_id'], db)
+    
     # Підготовка відповіді для користувача
-    print(user_documents)
     if user_documents:
-        # Якщо є документи, то відправляємо їх користувачеві
+        # Якщо є документи, то відправляємо їх користувачеві разом з кнопкою для видалення
+        keyboard = {
+            'inline_keyboard': [
+                [{'text': 'Видалити всі файли', 'callback_data': 'delete_all_files'}],
+            ]
+        }
+        keyboard_json = json.dumps(keyboard)
         documents_text = "\n".join(user_documents)
-        response_text = f"Ваші документи:\n{documents_text}"
+        response_text = f"Ваші документи:\n{documents_text}\n\nВи можете видалити всі файли за допомогою кнопки нижче:"
     else:
         # Якщо документів немає, повідомляємо користувачеві про це
         response_text = "У вас немає збережених документів."
+        keyboard_json = None
+
     # Підготовка відповіді для відправки користувачеві
     payload = {
         'chat_id': telegram_data['sender_id'],
-        'text': response_text
+        'text': response_text,
+        'reply_markup': keyboard_json  # Додаємо кнопку для видалення файлів
     }
 
     return payload, 'SendMessage'

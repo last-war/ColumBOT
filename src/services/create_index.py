@@ -59,7 +59,7 @@ async def create_index(file_path: str, sender_id: int, file_name: str, db: Sessi
 
     text_splitter = CharacterTextSplitter(
         separator='\n',
-        chunk_size=1024,
+        chunk_size=4096,
         chunk_overlap=128
     )
 
