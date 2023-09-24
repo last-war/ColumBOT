@@ -4,7 +4,8 @@ from src.database.models import Query
 
 
 async def get_user_queries(chat_id: int, db: Session) -> list:
-    return db.query(Query).filter_by(user_id=chat_id).all()
+    user = await get_user_by_user_id(chat_id, db)
+    return db.query(Query).filter_by(user_id=user.id).all()
 
 
 async def get_query_by_id(query_id: int, db: Session) -> Query | None:
