@@ -10,13 +10,14 @@ from sqlalchemy.orm import Session
 from src.conf.config import settings
 from src.database.db import get_db
 from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
-    set_user_openai_model, get_user_model, get_user_admin
+    set_user_gpt2_model, get_user_model, get_user_admin
 from src.repository.doc import get_user_documents
 from src.schemas.users import UserModel
 from src.services.admin_panel import admin_panel_users_in_db, admin_panel_users_file_in_db
 from src.services.create_index import create_index
 from src.services.falcon_llm import create_conversation as create_falcon_conversation
 from src.services.dolly_llm import create_conversation as create_dolly_conversation
+from src.services.gpt2_llm import create_conversation as create_gpt2_conversation
 
 
 BASE_URL = f'https://api.telegram.org/bot{settings.telegram_token}'
@@ -84,14 +85,14 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
             return True
 
 # User change model
-    if telegram_data['is_data'] and telegram_data['data'] in ['falcon_model', 'dolly_model', 'openai_model']:
+    if telegram_data['is_data'] and telegram_data['data'] in ['falcon_model', 'dolly_model', 'gpt2_model']:
         model_ = 'Помилка. Модель не обрано...'
         if telegram_data['data'] in 'falcon_model':
             model_ = await set_user_falcon_model(telegram_data['sender_id'], db)
         elif telegram_data['data'] in 'dolly_model':
             model_ = await set_user_dolly_model(telegram_data['sender_id'], db)
-        elif telegram_data['data'] in 'openai_model':
-            model_ = await set_user_openai_model(telegram_data['sender_id'], db)
+        elif telegram_data['data'] in 'gpt2_model':
+            model_ = await set_user_gpt2_model(telegram_data['sender_id'], db)
 
         payload = {
                 'chat_id': telegram_data['sender_id'],
@@ -147,8 +148,10 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
                 print('dolly')
                 qa = create_dolly_conversation()
                 q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
-            elif model == "openai":
-                pass
+            elif model == "gpt2":
+                print('gpt2')
+                qa = create_gpt2_conversation()
+                q_text = qa({'question': telegram_data['text'], 'chat_history': {}})
 
         except Exception as e:
             print('exception')
@@ -271,7 +274,7 @@ async def choose_model(telegram_data: dict, db: Session) -> tuple:
         'inline_keyboard': [
             [{'text': 'Falcon', 'callback_data': 'falcon_model'}],
             [{'text': 'Dolly', 'callback_data': 'dolly_model'}],
-            [{'text': 'OpenAI', 'callback_data': 'openai_model'}],
+            [{'text': 'GPT2', 'callback_data': 'gpt2_model'}],
         ]
     }
 

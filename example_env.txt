@@ -1,4 +1,4 @@
-_HF_API_KEY=""
+HF_API_KEY=""
 TELEGRAM_TOKEN="1234567890:"
 BASE_URL="https://api.telegram.org/bot1234567890:"
 DB_DIR="data/db"                                   # Директорія для бази даних
