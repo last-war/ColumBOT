@@ -49,9 +49,9 @@ async def set_user_dolly_model(user_id: int, db: Session) -> Model:
     return user.model
 
 
-async def set_user_openai_model(user_id: int, db: Session) -> Model:
+async def set_user_gpt2_model(user_id: int, db: Session) -> Model:
     user = await get_user_by_user_id(user_id, db)
-    user.model = Model.openai
+    user.model = Model.gpt2
     db.commit()
     db.refresh(user)
     return user.model

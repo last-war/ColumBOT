@@ -13,7 +13,7 @@ class Model(enum.Enum):
     """
     falcon: str = 'falcon'
     dolly: str = 'dolly'
-    openai: str = 'openai'
+    gpt2: str = 'gpt2'
 
 
 class User(Base):
