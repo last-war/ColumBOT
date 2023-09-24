@@ -13,6 +13,7 @@ from src.repository.users import get_user_by_user_id, create_user, set_user_falc
     set_user_openai_model, get_user_model, get_user_admin
 from src.repository.doc import get_user_documents
 from src.schemas.users import UserModel
+from src.services.admin_panel import admin_panel_users_in_db, admin_panel_users_file_in_db
 from src.services.create_index import create_index
 from src.services.falcon_llm import create_conversation as create_falcon_conversation
 from src.services.dolly_llm import create_conversation as create_dolly_conversation
@@ -83,7 +84,7 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
             return True
 
 # User change model
-    if telegram_data['is_data']:
+    if telegram_data['is_data'] and telegram_data['data'] in ['falcon_model', 'dolly_model', 'openai_model']:
         model_ = 'Помилка. Модель не обрано...'
         if telegram_data['data'] in 'falcon_model':
             model_ = await set_user_falcon_model(telegram_data['sender_id'], db)
@@ -95,6 +96,32 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
         payload = {
                 'chat_id': telegram_data['sender_id'],
                 'text': f'Ви обрали модель: {str(model_.name)}.'
+            }
+
+        headers = {'Content-Type': 'application/json'}
+
+        response = requests.request(
+            'POST', f'{settings.base_url}/SendMessage', json=payload, headers=headers)
+        status_code = response.status_code
+        response = json.loads(response.text)
+
+        if status_code == 200 and response['ok']:
+            return True
+
+    # admin_panel
+    if telegram_data['is_data'] and telegram_data['data'] in ['admin_panel_users', 'admin_panel_us_file']:
+        first_text = ''
+        result = ''
+        if telegram_data['data'] in 'admin_panel_users':
+            first_text = 'Користувачі'
+            result = await admin_panel_users_in_db(db)
+        elif telegram_data['data'] in 'admin_panel_us_file':
+            first_text = 'Документи користувачів'
+            result = await admin_panel_users_file_in_db(db)
+
+        payload = {
+                'chat_id': telegram_data['sender_id'],
+                'text': f'{first_text}:\n {result}'
             }
 
         headers = {'Content-Type': 'application/json'}
@@ -272,7 +299,7 @@ async def admin_panel(telegram_data: dict, db: Session) -> tuple:
     keyboard = {
         'inline_keyboard': [
             [{'text': 'Користувачі', 'callback_data': 'admin_panel_users'}],
-            [{'text': 'Файли користувачів', 'callback_data': 'admin_panel_users_file'}],
+            [{'text': 'Файли користувачів', 'callback_data': 'admin_panel_us_file'}],
         ]
     }
 

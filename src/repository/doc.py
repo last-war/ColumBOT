@@ -1,7 +1,10 @@
+from typing import List, Type
+
 from sqlalchemy.orm import Session
 from src.repository.users import get_user_by_user_id
 
 from src.database.models import Doc
+from src.schemas.doc import DocResponse
 
 
 async def get_user_documents(chat_id: int, db: Session) -> list:
@@ -17,6 +20,20 @@ async def get_user_documents(chat_id: int, db: Session) -> list:
         except Exception as e:
             print('Помилка при отриманні документів:', str(e))
     return user_documents
+
+
+async def get_all_doc(db: Session) -> List[DocResponse]:
+    docs = db.query(Doc).all()
+    result = []
+    for doc in docs:
+        doc_resp = DocResponse(
+            id=doc.id,
+            user_id=doc.user_id,
+            name=doc.name
+        )
+        result.append(doc_resp)
+
+    return result
 
 
 async def get_doc_by_id(doc_id: int, db: Session) -> Doc | None:

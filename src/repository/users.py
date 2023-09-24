@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, List
 
 from sqlalchemy.orm import Session
 
@@ -8,6 +8,10 @@ from src.schemas.users import UserModel
 
 async def get_user_by_user_id(user_id: int, db: Session) -> User | None:
     return db.query(User).filter_by(user_id=user_id).first()
+
+
+async def get_all_users(db: Session) -> List[Type[User]]:
+    return db.query(User).all()
 
 
 async def create_user(body: UserModel, db: Session) -> User:
