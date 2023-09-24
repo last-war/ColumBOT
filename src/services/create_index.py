@@ -1,10 +1,14 @@
-from langchain.vectorstores.chroma import Chroma
+from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import DirectoryLoader, TextLoader
-from PyPDF2 import PdfReader, PdfFileReader
+from PyPDF2 import PdfReader
+from sqlalchemy.orm import Session
 
 from src.conf.config import settings
+from src.repository.doc import create_doc
+from src.repository.users import get_use_docs, user_add_use_docs
+
 
 def is_valid_pdf(file_path: str, password: str = None) -> bool:
     try:
@@ -20,57 +24,54 @@ def is_valid_pdf(file_path: str, password: str = None) -> bool:
                     return False
             return True
     except Exception as e:
+        print(e)
         return False
 
-def create_index(file_path: str, password: str = None) -> None:
+
+async def create_index(file_path: str, sender_id: int, file_name: str, db: Session, password: str = None) -> None:
     if not is_valid_pdf(file_path, password):
         print("Неприпустимий PDF-файл з вкладеними скриптами або невірним паролем.")
         return
-
-    # Відкриваємо PDF-файл за вказаним шляхом
-    reader = PdfFileReader(open(file_path, 'rb'))
+    reader = PdfReader(open(file_path, 'rb'))
     text = ''
-    
-    # Зчитуємо текст з кожної сторінки PDF і додаємо його до змінної text
-    for page in range(reader.getNumPages()):
-        text += reader.getPage(page).extract_text()
 
     # Записуємо отриманий текст у файл output.txt у вказану директорію
+    for page in range(len(reader.pages)):
+        text += reader.pages[page].extract_text()
+
     with open(f'{settings.output_dir}/output.txt', 'w', encoding='utf-8') as file:
         file.write(text)
 
-    # Завантажуємо тексти з файлів у вказаній директорії
+    # Зберегти документ в базу постгреc
+    doc = await create_doc(sender_id, file_name, text, db)
+    user_use_docs = await get_use_docs(sender_id, db)
+    # Якщо список обраних документів юзера пустий додаємо йому ід цього документу до списку.
+    if user_use_docs == 0:
+        await user_add_use_docs(sender_id, doc.id, db)
+
     loader = DirectoryLoader(
         settings.output_dir,
         glob='**/*.txt',
         loader_cls=TextLoader
     )
 
-    # Завантажуємо документи з вказаної директорії
     documents = loader.load()
 
-    # Ініціалізуємо об'єкт для розділення тексту на частини
     text_splitter = CharacterTextSplitter(
         separator='\n',
-        chunk_size=1024,
+        chunk_size=4096,
         chunk_overlap=128
     )
 
-    # Розділяємо тексти на частини
     texts = text_splitter.split_documents(documents)
 
-    # Ініціалізуємо об'єкт для векторизації тексту за допомогою OpenAI
-    embeddings = HuggingFaceEmbeddings()
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
-    # Визначаємо директорію для збереження векторів
     persist_directory = settings.db_dir
 
-    # Створюємо та зберігаємо індекс векторів Chroma
     vectordb = Chroma.from_documents(
         documents=texts,
         embedding=embeddings,
         persist_directory=persist_directory
     )
-
-    # Зберігаємо створений індекс
     vectordb.persist()
