@@ -61,3 +61,12 @@ async def get_user_model(user_id: int, db: Session) -> str:
     user = await get_user_by_user_id(user_id, db)
     model_name = user.model.name
     return model_name
+
+
+async def get_user_admin(user_id: int, db: Session) -> bool:
+    user = await get_user_by_user_id(user_id, db)
+    if user:
+        if user.user_is_admin:
+            return True
+
+    return False

@@ -28,6 +28,7 @@ class User(Base):
     model = Column('models', Enum(Model), default=None)
     use_docs = ARRAY(Integer, as_tuple=False, dimensions=None, zero_indexes=False)
     docs = relationship("Doc", back_populates="user")
+    user_is_admin = Column(Boolean, default=False, nullable=False)
 
 
 class Doc(Base):

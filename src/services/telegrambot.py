@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from src.conf.config import settings
 from src.database.db import get_db
 from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
-    set_user_openai_model, get_user_model
+    set_user_openai_model, get_user_model, get_user_admin
 from src.repository.doc import get_user_documents
 from src.schemas.users import UserModel
 from src.services.create_index import create_index
@@ -259,6 +259,34 @@ async def choose_model(telegram_data: dict, db: Session) -> tuple:
     return payload, 'SendMessage'
 
 
+async def admin_panel(telegram_data: dict, db: Session) -> tuple:
+    user_admin = await get_user_admin(telegram_data['sender_id'], db)
+
+    if not user_admin:
+        payload = {
+            'chat_id': telegram_data['sender_id'],
+            'text': f'Ви не адмін. Доступ забаронений.',
+        }
+        return payload, 'SendMessage'
+
+    keyboard = {
+        'inline_keyboard': [
+            [{'text': 'Користувачі', 'callback_data': 'admin_panel_users'}],
+            [{'text': 'Файли користувачів', 'callback_data': 'admin_panel_users_file'}],
+        ]
+    }
+
+    keyboard_json = json.dumps(keyboard)
+
+    payload = {
+        'chat_id': telegram_data['sender_id'],
+        'text': f'Адмін панель. Ви можете скористатися командами нижче:',
+        'reply_markup': keyboard_json
+    }
+
+    return payload, 'SendMessage'
+
+
 async def helps(telegram_data: dict, db: Session) -> tuple:
     payload = {
         'chat_id': telegram_data['sender_id'],
@@ -273,4 +301,5 @@ MESSAGE_COMMAND = {
     '/choose_model': choose_model,
     '/choose_pdf': choose_pdf,
     '/helps': helps,
+    '/admin_panel': admin_panel,
 }
