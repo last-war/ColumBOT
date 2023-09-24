@@ -28,6 +28,7 @@ class User(Base):
     model = Column('models', Enum(Model), default=None)
     use_docs = ARRAY(Integer, as_tuple=False, dimensions=None, zero_indexes=False)
     docs = relationship("Doc", back_populates="user")
+    queries = relationship("Query", back_populates="user")
     user_is_admin = Column(Boolean, default=False, nullable=False)
 
 
@@ -40,3 +41,15 @@ class Doc(Base):
     description = Column(String(), unique=False, nullable=False)
     created_at = Column('created_at', DateTime, default=func.now())
     is_deleted = Column(Boolean, default=False)
+
+
+class Query(Base):
+    __tablename__ = 'queries'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user = relationship("User", back_populates="queries")
+    query_text = Column(String(), unique=False, nullable=False)
+    query_answer = Column(String(), unique=False, nullable=False)
+    created_at = Column('created_at', DateTime, default=func.now())
+    is_deleted = Column(Boolean, default=False)
+

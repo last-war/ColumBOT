@@ -11,6 +11,7 @@ from src.conf.config import settings
 from src.database.db import get_db
 from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
     set_user_gpt2_model, get_user_model, get_user_admin
+from src.repository.queries import create_query, get_user_queries
 from src.repository.doc import get_user_documents
 from src.schemas.users import UserModel
 from src.services.admin_panel import admin_panel_users_in_db, admin_panel_users_file_in_db
@@ -156,6 +157,8 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
         except Exception as e:
             print('exception')
             q_text = {'answer': e}
+
+        await create_query(telegram_data['sender_id'], telegram_data['text'], q_text['answer'], db)
 
         payload = {
             'chat_id': telegram_data['sender_id'],
