@@ -40,11 +40,9 @@ RUN git checkout docker_hub
 # Встановлюємо залежності з requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Зробити міграції до бази данних
-RUN alembic upgrade heads
-
 # Port
 EXPOSE 8000
 
 # Встановлюємо ENTRYPOINT
-ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+#ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD alembic upgrade head && uvicorn main:app --host localhost --port 8000 --reload
