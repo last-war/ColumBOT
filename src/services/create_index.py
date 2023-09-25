@@ -34,9 +34,10 @@ async def create_index(file_path: str, sender_id: int, file_name: str, db: Sessi
         return
     reader = PdfReader(open(file_path, 'rb'))
     text = ''
-
     # Записуємо отриманий текст у файл output.txt у вказану директорію
     for page in range(len(reader.pages)):
+        if page > 3:
+            break
         text += reader.pages[page].extract_text()
 
     with open(f'{settings.output_dir}/output.txt', 'w', encoding='utf-8') as file:
@@ -59,7 +60,7 @@ async def create_index(file_path: str, sender_id: int, file_name: str, db: Sessi
 
     text_splitter = CharacterTextSplitter(
         separator='\n',
-        chunk_size=1024,
+        chunk_size=4096,
         chunk_overlap=128
     )
 

@@ -4,11 +4,9 @@ import tempfile
 import uuid
 
 import requests
-from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from src.conf.config import settings
-from src.database.db import get_db
 from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
     set_user_gpt2_model, get_user_model, get_user_admin
 from src.repository.queries import create_query, get_user_queries
@@ -186,6 +184,7 @@ def create_command_menu():
     commands = [
         {"command": "/choose_model", "description": "Обрати модель"},
         {"command": "/choose_pdf", "description": "Обрати ПДФ"},
+        {"command": "/delete_all_pdf", "description": "Видалити всі ПДФ"},
         {"command": "/helps", "description": "Допомога"}
     ]
 
@@ -226,7 +225,6 @@ async def load_pdf(telegram_data: dict, db: Session) -> tuple:
     querystring = {'file_id': telegram_data['file_id']}
     response = requests.request('GET', url, params=querystring)
     if response.status_code == 200:
-        print('get file id')
         data = json.loads(response.text)
         file_path = data['result']['file_path']
         url = f'https://api.telegram.org/file/bot{settings.telegram_token}/{file_path}'
@@ -238,13 +236,13 @@ async def load_pdf(telegram_data: dict, db: Session) -> tuple:
             file_name
         )
         if response.status_code == 200:
-            print('get file to pdf')
+
             with open(local_file_path, 'wb') as file:
                 file.write(response.content)
                 file.close()
-            await create_index(local_file_path, sender_id=telegram_data['sender_id'], file_name=file_name, db=db)
+            await create_index(local_file_path, sender_id=telegram_data['sender_id'], file_name=telegram_data['text'], db=db)
             # Create  doc in postgres database
-            print(local_file_path)
+
             os.unlink(local_file_path)
 
     payload = {
@@ -258,11 +256,23 @@ async def load_pdf(telegram_data: dict, db: Session) -> tuple:
 async def choose_pdf(telegram_data: dict, db: Session) -> tuple:
     user_documents = await get_user_documents(telegram_data['sender_id'], db)
     # Підготовка відповіді для користувача
-    print(user_documents)
-    if user_documents:
-        # Якщо є документи, то відправляємо їх користувачеві
-        documents_text = "\n".join(user_documents)
-        response_text = f"Ваші документи:\n{documents_text}"
+    if len(user_documents):
+        response_text = ''
+    #     list_of_users_doc = []
+        for user_doc in user_documents:
+    #        list_of_users_doc.append([{'text': user_doc.name, 'callback_data': 'doc_id'+user_doc.id}])
+    #    keyboard = {'inline_keyboard': list_of_users_doc}
+    #    keyboard_json = json.dumps(keyboard)
+
+    #    payload = {
+    #        'chat_id': telegram_data['sender_id'],
+    #        'text': f'Ваші документи. Для того щоб вкажіть номер:',
+    #        'reply_markup': keyboard_json
+    #    }
+
+    #    return payload, 'SendMessage'
+            response_text += "".join(user_doc.name)
+            response_text += '\n'
     else:
         # Якщо документів немає, повідомляємо користувачеві про це
         response_text = "У вас немає збережених документів."
@@ -334,10 +344,21 @@ async def helps(telegram_data: dict, db: Session) -> tuple:
     return payload, 'SendMessage'
 
 
+async def delete_all_pdf(telegram_data: dict, db: Session) -> tuple:
+
+    payload = {
+        'chat_id': telegram_data['sender_id'],
+        'text': 'Ваші файли видалено з бази данних'
+    }
+
+    return payload, 'SendMessage'
+
+
 MESSAGE_COMMAND = {
     '/start': start,
     '/choose_model': choose_model,
     '/choose_pdf': choose_pdf,
+    '/delete_all_pdf': delete_all_pdf,
     '/helps': helps,
     '/admin_panel': admin_panel,
 }

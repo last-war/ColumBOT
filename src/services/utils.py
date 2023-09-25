@@ -25,6 +25,8 @@ def process_telegram_data(data: dict) -> dict:
         if 'document' in message.keys():
             if 'caption' in message.keys():
                 text = message['caption']
+            if 'file_name' in message['document'].keys():
+                text = message['document']['file_name']
             file_id = message['document']['file_id']
             mime_type = message['document']['mime_type']
             is_document = True
@@ -41,7 +43,8 @@ def process_telegram_data(data: dict) -> dict:
         if 'from' in message.keys():
             is_bot = message['from']['is_bot']
             first_name = message['from']['first_name']
-            username = message['from']['username']
+            if 'username' in message['from'].keys():
+                username = message['from']['username']
 
     if "callback_query" in data.keys():
         data_ = data['callback_query']

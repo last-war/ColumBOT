@@ -7,19 +7,19 @@ from src.database.models import Doc
 from src.schemas.doc import DocResponse
 
 
-async def get_user_documents(chat_id: int, db: Session) -> list:
-    user_documents = []
-    if chat_id:
-        # Ваш SQL-запит для отримання документів користувача
-        query = f"SELECT document_name FROM user_documents WHERE user_id = {chat_id}"
-        try:
-            with db as conn:
-                cursor = conn.cursor()
-                cursor.execute(query)
-                user_documents = [row[0] for row in cursor.fetchall()]
-        except Exception as e:
-            print('Помилка при отриманні документів:', str(e))
-    return user_documents
+async def get_user_documents(user_id: int, db: Session) -> List[DocResponse]:
+    user = await get_user_by_user_id(user_id, db)
+    docs = db.query(Doc).filter_by(user_id=user.id).limit(5).all()
+    result = []
+    for doc in docs:
+        doc_resp = DocResponse(
+            id=doc.id,
+            user_id=doc.user_id,
+            name=doc.name
+        )
+        result.append(doc_resp)
+
+    return result
 
 
 async def get_all_doc(db: Session) -> List[DocResponse]:
