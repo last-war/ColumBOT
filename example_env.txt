@@ -5,4 +5,10 @@ DB_DIR="data/db"                                   # Директорія для
 INPUT_FILE_PATH="data/input/sample.pdf"            # Шлях до вхідного PDF-файлу
 OUTPUT_DIR="data/output"                           # Директорія для виводу даних
 
-DATABASE_URL="postgresql+psycopg2://postgres:___@localhost:5432/____botdb"
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_PORT=
+POSTGRES_DOMAIN=
+
+DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_DOMAIN}:${POSTGRES_PORT}/${POSTGRES_DB}
