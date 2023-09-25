@@ -23,3 +23,11 @@ send:
 GUID secret token come up with it yourself according to the rules in the documentation. will work with this too.
   sample `1111111-111111-aaaaaaasaaA-XxXxXxXxXxXxXxXxXx`
 - create menu in bot execute -> `<ngrok url>/api/settings`
+
+
+## Install and run from docker-compose
+
+
+docker build --no-cache -t timvladislav13010/columbot:latest .
+
+docker run -d --env-file .env timvladislav13010/columbot:latest
