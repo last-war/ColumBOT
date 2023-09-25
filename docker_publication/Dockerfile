@@ -45,4 +45,10 @@ EXPOSE 8000
 
 # Встановлюємо ENTRYPOINT
 #ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-CMD alembic upgrade head && uvicorn main:app --host localhost --port 8000 --reload
+#CMD alembic upgrade heads && uvicorn main:app --host localhost --port 8000 --reload
+
+# Make the start script executable
+RUN chmod +x start.sh
+
+# Use the start script as the entry point
+ENTRYPOINT ["./start.sh"]
