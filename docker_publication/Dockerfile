@@ -48,7 +48,7 @@ EXPOSE 8000
 #CMD alembic upgrade heads && uvicorn main:app --host localhost --port 8000 --reload
 
 # Make the start script executable
-RUN chmod +x /docker_publication/start.sh
+RUN chmod +x ./start.sh
 
 # Use the start script as the entry point
-ENTRYPOINT ["/docker_publication/start.sh"]
+ENTRYPOINT ["./start.sh"]
