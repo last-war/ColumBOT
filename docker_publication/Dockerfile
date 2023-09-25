@@ -35,7 +35,7 @@ RUN git clone https://github.com/last-war/ColumBOT /app
 WORKDIR /app
 
 # Переключаємося на певну гілку (замініть 'yourbranch' на назву гілки)
-RUN git checkout dev
+RUN git checkout docker_hub
 
 # Встановлюємо залежності з requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
