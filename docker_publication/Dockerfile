@@ -29,10 +29,7 @@ RUN mkdir -p /app
 RUN pip install --upgrade pip
 
 # Клонуємо репозиторій з GitHub (замініть URL на URL вашого репозиторію)
-#RUN git clone https://github.com/last-war/ColumBOT /app
-
-# Копіюємо проект з локальної папки до контейнера
-COPY /шлях_до_проекту /app
+RUN git clone https://github.com/last-war/ColumBOT /app
 
 # Переходимо в каталог з клонованим репозиторієм
 WORKDIR /app
