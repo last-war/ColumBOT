@@ -41,7 +41,7 @@ RUN git checkout docker_hub
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Зробити міграції до бази данних
-RUN pip alembic upgrade head
+RUN alembic upgrade head
 
 # Port
 EXPOSE 8000
