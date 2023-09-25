@@ -14,7 +14,7 @@ from src.repository.users import get_user_by_user_id, create_user, set_user_falc
 from src.repository.queries import create_query, get_user_queries
 from src.repository.doc import get_user_documents
 from src.schemas.users import UserModel
-from src.services.admin_panel import admin_panel_users_in_db, admin_panel_users_file_in_db
+from src.services.admin_panel import admin_panel_users_in_db, admin_panel_users_file_in_db, admin_panel_users_query
 from src.services.create_index import create_index
 from src.services.falcon_llm import create_conversation as create_falcon_conversation
 from src.services.dolly_llm import create_conversation as create_dolly_conversation
@@ -111,7 +111,7 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
             return True
 
     # admin_panel
-    if telegram_data['is_data'] and telegram_data['data'] in ['admin_panel_users', 'admin_panel_us_file']:
+    if telegram_data['is_data'] and telegram_data['data'] in ['admin_panel_users', 'admin_panel_us_file', 'admin_panel_users_query']:
         first_text = ''
         result = ''
         if telegram_data['data'] in 'admin_panel_users':
@@ -120,6 +120,10 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
         elif telegram_data['data'] in 'admin_panel_us_file':
             first_text = 'Документи користувачів'
             result = await admin_panel_users_file_in_db(db)
+        elif telegram_data['data'] in 'admin_panel_users_query':
+            result = await admin_panel_users_query(telegram_data, db)
+            if result:
+                return True
 
         payload = {
                 'chat_id': telegram_data['sender_id'],
@@ -306,6 +310,7 @@ async def admin_panel(telegram_data: dict, db: Session) -> tuple:
         'inline_keyboard': [
             [{'text': 'Користувачі', 'callback_data': 'admin_panel_users'}],
             [{'text': 'Файли користувачів', 'callback_data': 'admin_panel_us_file'}],
+            [{'text': 'Запити користувачів', 'callback_data': 'admin_panel_users_query'}],
         ]
     }
 
