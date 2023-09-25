@@ -40,8 +40,11 @@ RUN git checkout dev
 # Встановлюємо залежності з requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Зробити міграції до бази данних
+RUN pip alembic upgrade head
+
 # Port
 EXPOSE 8000
 
-# Встановлюємо ENTRYPOINT для supervisord в якому запускаємо Fastapi and Redis
+# Встановлюємо ENTRYPOINT
 ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
