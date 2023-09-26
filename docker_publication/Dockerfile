@@ -35,13 +35,22 @@ RUN git clone https://github.com/last-war/ColumBOT /app
 WORKDIR /app
 
 # Переключаємося на певну гілку (замініть 'yourbranch' на назву гілки)
-RUN git checkout docker_hub
+RUN git checkout main
 
 # Встановлюємо залежності з requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Копіюємо start.sh у контейнер
+COPY start.sh /app/start.sh
+
+# Додаємо права на виконання для start.sh
+RUN chmod +x /app/start.sh
+
+# Встановлення Alembic
+RUN pip install alembic
+
 # Port
 EXPOSE 8000
 
-# Встановлюємо ENTRYPOINT
-ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Встановлюємо ENTRYPOINT для запуску start.sh
+ENTRYPOINT ["/app/start.sh"]

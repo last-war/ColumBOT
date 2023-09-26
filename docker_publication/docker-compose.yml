@@ -6,9 +6,17 @@ services:
       - ../.env
     ports:
       - "5432:5432"
+    networks:
+      - columnetworks  # Призначаємо мережу для контейнера
   columbot:
     image: timvladislav13010/columbot:latest
     ports:
       - "8000:8000"
     env_file:
       - ../.env
+    networks:
+      - columnetworks  # Призначаємо мережу для контейнера
+    environment:
+      - PATH=/usr/local/bin:$PATH
+networks:
+  columnetworks:

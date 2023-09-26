@@ -27,7 +27,10 @@ GUID secret token come up with it yourself according to the rules in the documen
 
 ## Install and run from docker-compose
 
+Create .env file from example_env.txt
+run `cd docker_publication`
+run `chmod +x run_presets.sh`
+run `./run_presets.sh`
 
-docker build --no-cache -t timvladislav13010/columbot:latest .
+And then see the instructions from above. ngrok ........- >
 
-docker run -d --env-file .env timvladislav13010/columbot:latest
