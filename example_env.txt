@@ -1,0 +1,14 @@
+HF_API_KEY=""
+TELEGRAM_TOKEN="1234567890:"
+BASE_URL="https://api.telegram.org/bot1234567890:"
+DB_DIR="data/db"                                   # Директорія для бази даних
+INPUT_FILE_PATH="data/input/sample.pdf"            # Шлях до вхідного PDF-файлу
+OUTPUT_DIR="data/output"                           # Директорія для виводу даних
+
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_PORT=
+POSTGRES_DOMAIN=
+
+DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_DOMAIN}:${POSTGRES_PORT}/${POSTGRES_DB}
