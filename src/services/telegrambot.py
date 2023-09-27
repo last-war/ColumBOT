@@ -9,11 +9,11 @@ from sqlalchemy.orm import Session
 from src.conf.config import settings
 from src.repository.users import get_user_by_user_id, create_user, set_user_falcon_model, set_user_dolly_model, \
     set_user_gpt2_model, get_user_model, get_user_admin
-from src.repository.queries import create_query, get_user_queries
-from src.repository.doc import get_user_documents
+from src.repository.queries import create_query
+from src.repository.doc import get_user_documents, delete_user_documents
 from src.schemas.users import UserModel
 from src.services.admin_panel import admin_panel_users_in_db, admin_panel_users_file_in_db, admin_panel_users_query
-from src.services.create_index import create_index
+from src.services.create_index import create_index, create_index_from_db
 from src.services.falcon_llm import create_conversation as create_falcon_conversation
 from src.services.dolly_llm import create_conversation as create_dolly_conversation
 from src.services.gpt2_llm import create_conversation as create_gpt2_conversation
@@ -77,6 +77,28 @@ async def bot_logic(telegram_data: dict, db: Session) -> bool:
 
         response = requests.request(
             'POST', f'{settings.base_url}/{response[1]}', json=response[0], headers=headers)
+        status_code = response.status_code
+        response = json.loads(response.text)
+
+        if status_code == 200 and response['ok']:
+            return True
+    if telegram_data['is_data'] and telegram_data['data'].startswith('doc_id'):
+        rez = await create_index_from_db(telegram_data['data'][6:], sender_id=telegram_data['sender_id'], db=db)
+
+        if rez:
+            payload = {
+                    'chat_id': telegram_data['sender_id'],
+                    'text': 'Файл обрано'
+                }
+        else:
+            payload = {
+                'chat_id': telegram_data['sender_id'],
+                'text': 'Помилка створення індексу'
+            }
+        headers = {'Content-Type': 'application/json'}
+
+        response = requests.request(
+            'POST', f'{settings.base_url}/SendMessage', json=payload, headers=headers)
         status_code = response.status_code
         response = json.loads(response.text)
 
@@ -258,21 +280,21 @@ async def choose_pdf(telegram_data: dict, db: Session) -> tuple:
     # Підготовка відповіді для користувача
     if len(user_documents):
         response_text = ''
-    #     list_of_users_doc = []
+        list_of_users_doc = []
         for user_doc in user_documents:
-    #        list_of_users_doc.append([{'text': user_doc.name, 'callback_data': 'doc_id'+user_doc.id}])
-    #    keyboard = {'inline_keyboard': list_of_users_doc}
-    #    keyboard_json = json.dumps(keyboard)
+            list_of_users_doc.append([{'text': user_doc.name, 'callback_data': f'doc_id{user_doc.id}'}])
+        keyboard = {'inline_keyboard': list_of_users_doc}
+        keyboard_json = json.dumps(keyboard)
 
-    #    payload = {
-    #        'chat_id': telegram_data['sender_id'],
-    #        'text': f'Ваші документи. Для того щоб вкажіть номер:',
-    #        'reply_markup': keyboard_json
-    #    }
+        payload = {
+            'chat_id': telegram_data['sender_id'],
+            'text': f'Ваші документи. Для того щоб вкажіть номер:',
+            'reply_markup': keyboard_json
+        }
 
-    #    return payload, 'SendMessage'
-            response_text += "".join(user_doc.name)
-            response_text += '\n'
+        return payload, 'SendMessage'
+    #        response_text += "".join(user_doc.name)
+    #        response_text += '\n'
     else:
         # Якщо документів немає, повідомляємо користувачеві про це
         response_text = "У вас немає збережених документів."
@@ -345,11 +367,16 @@ async def helps(telegram_data: dict, db: Session) -> tuple:
 
 
 async def delete_all_pdf(telegram_data: dict, db: Session) -> tuple:
-
-    payload = {
-        'chat_id': telegram_data['sender_id'],
-        'text': 'Ваші файли видалено з бази данних'
-    }
+    if await delete_user_documents(telegram_data['sender_id'], db):
+        payload = {
+            'chat_id': telegram_data['sender_id'],
+            'text': 'Ваші файли видалено з бази данних'
+        }
+    else:
+        payload = {
+            'chat_id': telegram_data['sender_id'],
+            'text': 'Помилка видалення файлів'
+        }
 
     return payload, 'SendMessage'
 

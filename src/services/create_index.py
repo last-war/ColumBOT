@@ -6,7 +6,7 @@ from PyPDF2 import PdfReader
 from sqlalchemy.orm import Session
 
 from src.conf.config import settings
-from src.repository.doc import create_doc
+from src.repository.doc import create_doc, get_doc_by_id
 from src.repository.users import get_use_docs, user_add_use_docs
 
 
@@ -26,6 +26,46 @@ def is_valid_pdf(file_path: str, password: str = None) -> bool:
     except Exception as e:
         print(e)
         return False
+
+
+async def create_index_from_db(file_id: str, sender_id: int, db: Session) -> bool:
+    print(file_id)
+    doc = await get_doc_by_id(int(file_id), db)
+    if doc:
+        text = doc.description
+    else:
+        return False
+
+    with open(f'{settings.output_dir}/output.txt', 'w', encoding='utf-8') as file:
+        file.write(text)
+
+    loader = DirectoryLoader(
+        settings.output_dir,
+        glob='**/*.txt',
+        loader_cls=TextLoader
+    )
+
+    documents = loader.load()
+
+    text_splitter = CharacterTextSplitter(
+        separator='\n',
+        chunk_size=4096,
+        chunk_overlap=128
+    )
+
+    texts = text_splitter.split_documents(documents)
+
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+
+    persist_directory = settings.db_dir
+
+    vectordb = Chroma.from_documents(
+        documents=texts,
+        embedding=embeddings,
+        persist_directory=persist_directory
+    )
+    vectordb.persist()
+    return True
 
 
 async def create_index(file_path: str, sender_id: int, file_name: str, db: Session, password: str = None) -> None:

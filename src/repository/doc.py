@@ -7,6 +7,18 @@ from src.database.models import Doc
 from src.schemas.doc import DocResponse
 
 
+async def delete_user_documents(user_id: int, db: Session) -> bool:
+    user = await get_user_by_user_id(user_id, db)
+    docs = db.query(Doc).filter_by(user_id=user.id).all()
+    if docs:
+        for doc in docs:
+            db.delete(doc)
+            db.commit()
+        return True
+    else:
+        return False
+
+
 async def get_user_documents(user_id: int, db: Session) -> List[DocResponse]:
     user = await get_user_by_user_id(user_id, db)
     docs = db.query(Doc).filter_by(user_id=user.id).limit(5).all()
